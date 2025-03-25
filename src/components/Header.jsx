@@ -15,6 +15,8 @@ import { IoLogOutOutline, IoSearchOutline } from "react-icons/io5";
 import MenuDrawer from "./MenuDrawer";
 import { FaRegHeart } from "react-icons/fa";
 import { TbLogout } from "react-icons/tb";
+import { useDarkTheme } from "../context/DarkTheme";
+import { BsFillMoonStarsFill } from "react-icons/bs";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -48,6 +50,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [pageTitle, setPageTitle] = React.useState("Dashboard");
+
+  const { darkTheme, toggleTheme } = useDarkTheme();
 
   const isMenuOpen = Boolean(anchorEl);
 
@@ -87,6 +91,12 @@ export default function Header() {
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{display: 'flex', gap: '25px'}}>
+            <IconButton size="large"
+              aria-label="show 4 new mails"
+              color="inherit"
+              onClick={toggleTheme}>
+              <BsFillMoonStarsFill />
+            </IconButton>
             <IconButton
               size="large"
               aria-label="show 4 new mails"

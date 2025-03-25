@@ -5,4 +5,16 @@ html{
 body{
   margin: 0;
   font-family: 'Poppins', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.light-theme {
+  --background-color: white;
+  --text-color: black;
+}
+
+.dark-theme {
+  --background-color: #121212;
+  --text-color: white;
 }

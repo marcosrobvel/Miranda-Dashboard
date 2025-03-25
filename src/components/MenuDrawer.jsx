@@ -24,8 +24,10 @@ export default function MenuDrawer() {
     {
       name: "Dashboard",
       icon: <MdOutlineDashboard style={{ width: "25px", height: "25px" }} />,
+      path: "/",
     },
-    { name: "Bookings", icon: <FaRegCalendarCheck style={{ width: "25px", height: "25px" }} /> },
+    { name: "Bookings", icon: <FaRegCalendarCheck style={{ width: "25px", height: "25px" }} />,
+    path: "/bookings", },
     {
       name: "Rooms",
       icon: <SlKey style={{ width: "25px", height: "25px" }} />,
