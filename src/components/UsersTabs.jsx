@@ -4,8 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { useDarkTheme } from '../context/DarkTheme';
-import RoomsTable from './RoomsTable';
-//import { StyledBox, StyledTab } from './RoomsTabs';
+import { StyledBox, StyledTab } from './BookingTabs';
+import UsersTable from './UsersTable';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -36,7 +36,7 @@ function a11yProps(index) {
   };
 }
 
-export default function RoomsTabs(props) {
+export default function UsersTabs(props) {
   const [value, setValue] = React.useState(0);
   const { darkTheme } = useDarkTheme();
 
@@ -54,25 +54,21 @@ export default function RoomsTabs(props) {
 
   return (
     <Box>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <StyledBox sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="All Bookings" {...a11yProps(0)} sx={tabStyle} />
-          <Tab label="Checking In" {...a11yProps(1)} sx={tabStyle} />
-          <Tab label="Checking Out" {...a11yProps(2)} sx={tabStyle} />
-          <Tab label="In Progress" {...a11yProps(3)} sx={tabStyle} />
+          <StyledTab label="All Employee" {...a11yProps(0)} sx={tabStyle} />
+          <StyledTab label="Active Employee" {...a11yProps(1)} sx={tabStyle} />
+          <StyledTab label="Inactive Employee" {...a11yProps(2)} sx={tabStyle} />
         </Tabs>
-      </Box>
+      </StyledBox>
       <CustomTabPanel value={value} index={0}>
-        <RoomsTable bookingsData={props.bookingsData}/>
+        <UsersTable usersData={props.usersData}/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <RoomsTable bookingsData={props.bookingsData.filter((item) => item.bookStatus === "in")}/>
+        <UsersTable usersData={props.usersData.filter((item) => item.status === "active")}/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <RoomsTable bookingsData={props.bookingsData.filter((item) => item.bookStatus === "out")}/>
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={3}>
-        <RoomsTable bookingsData={props.bookingsData.filter((item) => item.bookStatus === "progress")}/>
+        <UsersTable usersData={props.usersData.filter((item) => item.status === "inactive")}/>
       </CustomTabPanel>
     </Box>
   );

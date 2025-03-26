@@ -17,6 +17,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { TbLogout } from "react-icons/tb";
 import { useDarkTheme } from "../context/DarkTheme";
 import { BsFillMoonStarsFill } from "react-icons/bs";
+import { useLocation } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -48,8 +49,32 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [pageTitle, setPageTitle] = React.useState("Dashboard");
+  const location = useLocation();
+
+  React.useEffect(() => {
+    switch (location.pathname) {
+      case "/":
+        setPageTitle("Dashboard");
+        break;
+      case "/bookings":
+        setPageTitle("Bookings");
+        break;
+      case "/rooms":
+        setPageTitle("Rooms");
+        break;
+      case "/contact":
+        setPageTitle("Contact");
+        break;
+      case "/users":
+        setPageTitle("Users");
+        break;
+      default:
+        setPageTitle("Dashboard");
+    }
+  }, [location.pathname]);
 
   const { darkTheme, toggleTheme } = useDarkTheme();
 

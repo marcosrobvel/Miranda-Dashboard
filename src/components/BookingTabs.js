@@ -8,7 +8,7 @@ export const StyledBoxContainer = styled(Box)`
 
 export const StyledBox = styled(Box)`
   & .MuiTabs-indicator {
-    background-color: #135846;
+    background-color: rgb(16, 129, 99);
     height: 2px;
     
   }

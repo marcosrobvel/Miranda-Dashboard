@@ -1,4 +1,4 @@
-export default [
+const usersData = [
   {
     photo: "https://robohash.org/dictaestqui.png?size=50x50&set=set1",
     id: 1,
@@ -338,3 +338,5 @@ export default [
     endDate: '12-31-21'
   },
 ];
+
+export default usersData;
