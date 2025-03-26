@@ -1,4 +1,4 @@
-export default [
+const roomsData = [
   {
     id: 1,
     photo: [
@@ -419,3 +419,5 @@ export default [
     status: "available",
   },
 ];
+
+export default roomsData;

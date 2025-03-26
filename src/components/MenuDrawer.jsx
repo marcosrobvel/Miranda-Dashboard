@@ -12,6 +12,7 @@ import { MdOutlineDashboard } from "react-icons/md";
 import { SlKey } from "react-icons/sl";
 import { FaRegCalendarCheck, FaUsers } from "react-icons/fa";
 import { FiAtSign } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 export default function MenuDrawer() {
   const [open, setOpen] = React.useState(false);
@@ -20,6 +21,13 @@ export default function MenuDrawer() {
     setOpen(newOpen);
   };
 
+  const navigate = useNavigate(); 
+
+  const handleNavigation = (path) => {
+    navigate(path); 
+  };
+
+
   const list = [
     {
       name: "Dashboard",
@@ -27,18 +35,22 @@ export default function MenuDrawer() {
       path: "/",
     },
     { name: "Bookings", icon: <FaRegCalendarCheck style={{ width: "25px", height: "25px" }} />,
-    path: "/bookings", },
+    path: "/bookings", 
+  },
     {
       name: "Rooms",
       icon: <SlKey style={{ width: "25px", height: "25px" }} />,
+      path: "/rooms",
     },
     {
       name: "Contact",
       icon: <FiAtSign  style={{ width: "25px", height: "25px" }} />,
+      path: "/contact",
     },
     {
       name: "Users",
       icon: <FaUsers style={{ width: "25px", height: "25px"}} />,
+      path: "/users",
     },
   ];
 
@@ -46,7 +58,7 @@ export default function MenuDrawer() {
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
         {list.map((item) => (
-          <ListItem key={item.name} disablePadding>
+          <ListItem key={item.name} disablePadding onClick={() => handleNavigation(item.path)}>
             <ListItemButton>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.name} />
