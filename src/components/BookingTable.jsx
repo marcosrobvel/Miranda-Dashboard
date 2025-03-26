@@ -19,7 +19,6 @@ export default function BookingTable(props) {
             <TableCell sx={{ fontWeight: 'bold' }}>Check Out</TableCell>
             <TableCell sx={{ fontWeight: 'bold' }}>Special Request</TableCell>
             <TableCell sx={{ fontWeight: 'bold' }}>Room Type</TableCell>
-            <TableCell sx={{ fontWeight: 'bold' }}>Room Number</TableCell>
             <TableCell sx={{ fontWeight: 'bold' }}>Status</TableCell>
           </TableRow>
         </TableHead>
@@ -27,13 +26,15 @@ export default function BookingTable(props) {
           {Array.isArray(props.bookingsData) && props.bookingsData.length > 0 ? (
             props.bookingsData.map((booking) => (
               <TableRow key={booking.id}>
-                <TableCell>{booking.guest}</TableCell>
+                <TableCell>
+                  {booking.guest}
+                  <p>#{booking.id}</p>
+                </TableCell>
                 <TableCell>{booking.orderDate}</TableCell>
                 <TableCell>{booking.checkIn}</TableCell>
                 <TableCell>{booking.checkOut}</TableCell>
                 <TableCell>{booking.special}</TableCell>
-                <TableCell>{booking.roomType}</TableCell>
-                <TableCell>{booking.roomNumber}</TableCell>
+                <TableCell>{booking.roomType} - {booking.roomNumber}</TableCell>
                 <TableCell>{booking.bookStatus}</TableCell>
               </TableRow>
             ))

@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import BookingTable from './BookingTable';
 import { useDarkTheme } from '../context/DarkTheme';
+import { StyledBox, StyledTab } from './BookingTabs';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -44,23 +45,23 @@ export default function BookingTabs(props) {
   };
 
   const tabStyle = {
-    color: darkTheme ? 'white' : 'black',  // Cambiar color del texto según el tema
+    color: darkTheme ? 'white' : 'black', 
     '&.Mui-selected': {
-      backgroundColor: darkTheme ? '#333' : '#f5f5f5',  // Fondo seleccionado en modo oscuro o claro
+      backgroundColor: darkTheme ? '#333' : '#f5f5f5', 
       color: darkTheme ? 'white' : 'black',
     },
   };
 
   return (
     <Box>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <StyledBox sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="All Bookings" {...a11yProps(0)} sx={tabStyle} />
-          <Tab label="Checking In" {...a11yProps(1)} sx={tabStyle} />
-          <Tab label="Checking Out" {...a11yProps(2)} sx={tabStyle} />
-          <Tab label="In Progress" {...a11yProps(3)} sx={tabStyle} />
+          <StyledTab label="All Bookings" {...a11yProps(0)} sx={tabStyle} />
+          <StyledTab label="Checking In" {...a11yProps(1)} sx={tabStyle} />
+          <StyledTab label="Checking Out" {...a11yProps(2)} sx={tabStyle} />
+          <StyledTab label="In Progress" {...a11yProps(3)} sx={tabStyle} />
         </Tabs>
-      </Box>
+      </StyledBox>
       <CustomTabPanel value={value} index={0}>
         <BookingTable bookingsData={props.bookingsData}/>
       </CustomTabPanel>
