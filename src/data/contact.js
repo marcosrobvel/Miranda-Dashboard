@@ -1,4 +1,4 @@
-export default [
+const contactData = [
   {
     photo: "https://robohash.org/dictaestqui.png?size=50x50&set=set1",
     id: 1,
@@ -200,3 +200,5 @@ export default [
     comment: "Occupant of rail trn-veh injured in unsp railway accident",
   },
 ];
+
+export default contactData;

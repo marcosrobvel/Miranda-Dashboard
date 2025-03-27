@@ -8,6 +8,7 @@ import MenuDrawer from "./components/MenuDrawer.jsx";
 import { DarkThemeProvider } from "./context/DarkTheme.jsx";
 import RoomsList from "./pages/RoomsList.jsx";
 import UsersList from "./pages/UsersList.jsx";
+import Contact from "./pages/Contact.jsx";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/bookings" element={<BookingList />} />
           <Route path="/rooms" element={<RoomsList />} />
           <Route path="/users" element={<UsersList />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </Router>
     </DarkThemeProvider>

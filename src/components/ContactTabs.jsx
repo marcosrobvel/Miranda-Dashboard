@@ -4,8 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { useDarkTheme } from '../context/DarkTheme';
-import { StyledBox, StyledTab } from './BookingTabs.js';
-import BookingTable from './BookingTable.jsx';
+import { StyledBox, StyledTab } from './BookingTabs';
+import ContactTable from './ContactTable';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -36,7 +36,7 @@ function a11yProps(index) {
   };
 }
 
-export default function BookingTabs(props) {
+export default function ContactTabs(props) {
   const [value, setValue] = React.useState(0);
   const { darkTheme } = useDarkTheme();
 
@@ -56,23 +56,15 @@ export default function BookingTabs(props) {
     <Box>
       <StyledBox sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <StyledTab label="All Bookings" {...a11yProps(0)} sx={tabStyle} />
-          <StyledTab label="Checking In" {...a11yProps(1)} sx={tabStyle} />
-          <StyledTab label="Checking Out" {...a11yProps(2)} sx={tabStyle} />
-          <StyledTab label="In Progress" {...a11yProps(3)} sx={tabStyle} />
+          <StyledTab label="All Contacts" {...a11yProps(0)} sx={tabStyle} />
+          <StyledTab label="Archived" {...a11yProps(1)} sx={tabStyle} />
         </Tabs>
       </StyledBox>
       <CustomTabPanel value={value} index={0}>
-        <BookingTable bookingsData={props.bookingsData}/>
+        <ContactTable contactData={props.contactData}/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <BookingTable bookingsData={props.bookingsData.filter((item) => item.bookStatus === "in")}/>
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-        <BookingTable bookingsData={props.bookingsData.filter((item) => item.bookStatus === "out")}/>
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={3}>
-        <BookingTable bookingsData={props.bookingsData.filter((item) => item.bookStatus === "progress")}/>
+        <ContactTable contactData={props.contactData.filter((item) => item.status === "archived")}/>
       </CustomTabPanel>
     </Box>
   );
