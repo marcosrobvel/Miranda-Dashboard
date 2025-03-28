@@ -1,25 +1,33 @@
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { StyledTableCell } from './BookingTable';
+import { StyledTableCell, StyledTableCellHead } from './styled-components/BookingTable';
 import { Table } from '@mui/material';
 
 
 export default function ContactTable(props) {
+
+  
+
+    const handleChangeColorBtn = (e) => {
+        e.target.style.backgroundColor = 'red';
+        e.target.style.color = 'white';
+    }
+
+    console.log(props.contactData);
+
   return (
     <TableContainer component={Paper} sx={{ maxWidth: '100%', margin: 'auto', boxShadow: 3 }}>
       <Table sx={{ minWidth: 650 }} aria-label="contact table" >
         <TableHead>
           <TableRow>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>Date</StyledTableCell>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>Customer</StyledTableCell>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>Comment</StyledTableCell>
-            <StyledTableCell></StyledTableCell>
-            <StyledTableCell></StyledTableCell>
+            <StyledTableCellHead>Date</StyledTableCellHead>
+            <StyledTableCellHead>Customer</StyledTableCellHead>
+            <StyledTableCellHead>Comment</StyledTableCellHead>
+            <StyledTableCellHead>Archive</StyledTableCellHead>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -37,7 +45,17 @@ export default function ContactTable(props) {
                 <StyledTableCell>{contact.subject} 
                     <p>{contact.comment}</p>
                     </StyledTableCell>
-                    <StyledTableCell>Archive</StyledTableCell>
+                    <StyledTableCell>
+                            <button 
+                                className='contact-archive-button' 
+                                onClick={(e) => {
+                                    contact.status = "archived";
+                                    handleChangeColorBtn(e);
+                                 }}
+                            >
+                                Archive
+                            </button>
+                    </StyledTableCell>
               </TableRow>
             ))
           ) : (

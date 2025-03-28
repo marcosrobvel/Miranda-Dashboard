@@ -8,6 +8,7 @@ const contactData = [
     phone: "656-294-7846",
     subject: 'New Subject',
     comment: "Acute lacrimal canaliculitis of left lacrimal passage",
+    status: "",
   },
   {
     photo: "https://robohash.org/reiciendismaximedolore.png?size=50x50&set=set1",
@@ -18,6 +19,7 @@ const contactData = [
     phone: "400-287-5377",
     subject: 'New Subject',
     comment: "Heat exhaustion due to salt depletion, subsequent encounter",
+    status: "",
   },
   {
     photo: "https://robohash.org/iustoaccusamussimilique.png?size=50x50&set=set1",
@@ -28,6 +30,7 @@ const contactData = [
     phone: "406-611-6165",
     subject: 'New Subject',
     comment: "Occ of anml-drn veh inj by fall fr veh in nonclsn acc, subs",
+    status: "",
   },
   {
     photo: "https://robohash.org/laudantiumdoloresvoluptas.png?size=50x50&set=set1",
@@ -38,6 +41,7 @@ const contactData = [
     phone: "810-946-1704",
     subject: 'New Subject',
     comment: "Wedge comprsn fx first lum vert, subs for fx w routn heal",
+    status: "",
   },
   {
     photo: "https://robohash.org/quiaadipiscicumque.png?size=50x50&set=set1",
@@ -48,6 +52,7 @@ const contactData = [
     phone: "671-184-3182",
     subject: 'New Subject',
     comment: "Poisoning by antirheumatics, NEC, self-harm, init",
+    status: "",
   },
   {
     photo: "https://robohash.org/quodeaquedignissimos.png?size=50x50&set=set1",
@@ -58,6 +63,7 @@ const contactData = [
     phone: "426-319-1022",
     subject: 'New Subject',
     comment: "Ped on foot injured in clsn w 2-3-whl mv nontraf, sequela",
+    status: "",
   },
   {
     photo: "https://robohash.org/etquiut.png?size=50x50&set=set1",
@@ -68,6 +74,7 @@ const contactData = [
     phone: "205-759-7294",
     subject: 'New Subject',
     comment: "Subluxation and dislocation of C5-C6 cervical vertebrae",
+    status: "",
   },
   {
     photo: "https://robohash.org/dictaestqui.png?size=50x50&set=set1",
@@ -78,6 +85,7 @@ const contactData = [
     phone: "697-856-8889",
     subject: 'New Subject',
     comment: "Drown d-t thrown ovrbrd by motion of power wtrcrft, sqla",
+    status: "",
   },
   {
     photo: "https://robohash.org/quaeseddolores.png?size=50x50&set=set1",
@@ -88,6 +96,7 @@ const contactData = [
     phone: "865-964-6689",
     subject: 'New Subject',
     comment: "Unsp place in oth residential institution as place",
+    status: "",
   },
   {
     photo: "https://robohash.org/doloresinsint.png?size=50x50&set=set1",
@@ -98,6 +107,7 @@ const contactData = [
     phone: "665-968-3135",
     subject: 'New Subject',
     comment: "Occupant of rail trn-veh injured in unsp railway accident",
+    status: "",
   },
   {
     photo: "https://robohash.org/dictaestqui.png?size=50x50&set=set1",
@@ -108,6 +118,7 @@ const contactData = [
     phone: "656-294-7846",
     subject: 'New Subject',
     comment: "Acute lacrimal canaliculitis of left lacrimal passage",
+    status: "",
   },
   {
     photo: "https://robohash.org/reiciendismaximedolore.png?size=50x50&set=set1",
@@ -118,6 +129,7 @@ const contactData = [
     phone: "400-287-5377",
     subject: 'New Subject',
     comment: "Heat exhaustion due to salt depletion, subsequent encounter",
+    status: "",
   },
   {
     photo: "https://robohash.org/iustoaccusamussimilique.png?size=50x50&set=set1",
@@ -128,6 +140,7 @@ const contactData = [
     phone: "406-611-6165",
     subject: 'New Subject',
     comment: "Occ of anml-drn veh inj by fall fr veh in nonclsn acc, subs",
+    status: "",
   },
   {
     photo: "https://robohash.org/laudantiumdoloresvoluptas.png?size=50x50&set=set1",
@@ -138,6 +151,7 @@ const contactData = [
     phone: "810-946-1704",
     subject: 'New Subject',
     comment: "Wedge comprsn fx first lum vert, subs for fx w routn heal",
+    status: "",
   },
   {
     photo: "https://robohash.org/quiaadipiscicumque.png?size=50x50&set=set1",
@@ -148,6 +162,7 @@ const contactData = [
     phone: "671-184-3182",
     subject: 'New Subject',
     comment: "Poisoning by antirheumatics, NEC, self-harm, init",
+    status: "",
   },
   {
     photo: "https://robohash.org/quodeaquedignissimos.png?size=50x50&set=set1",
@@ -158,6 +173,7 @@ const contactData = [
     phone: "426-319-1022",
     subject: 'New Subject',
     comment: "Ped on foot injured in clsn w 2-3-whl mv nontraf, sequela",
+    status: "",
   },
   {
     photo: "https://robohash.org/etquiut.png?size=50x50&set=set1",
@@ -168,6 +184,7 @@ const contactData = [
     phone: "205-759-7294",
     subject: 'New Subject',
     comment: "Subluxation and dislocation of C5-C6 cervical vertebrae",
+    status: "",
   },
   {
     photo: "https://robohash.org/dictaestqui.png?size=50x50&set=set1",
@@ -178,6 +195,7 @@ const contactData = [
     phone: "697-856-8889",
     subject: 'New Subject',
     comment: "Drown d-t thrown ovrbrd by motion of power wtrcrft, sqla",
+    status: "",
   },
   {
     photo: "https://robohash.org/quaeseddolores.png?size=50x50&set=set1",
@@ -188,6 +206,7 @@ const contactData = [
     phone: "865-964-6689",
     subject: 'New Subject',
     comment: "Unsp place in oth residential institution as place",
+    status: "",
   },
   {
     photo: "https://robohash.org/doloresinsint.png?size=50x50&set=set1",
@@ -198,6 +217,7 @@ const contactData = [
     phone: "665-968-3135",
     subject: 'New Subject',
     comment: "Occupant of rail trn-veh injured in unsp railway accident",
+    status: "",
   },
 ];
 

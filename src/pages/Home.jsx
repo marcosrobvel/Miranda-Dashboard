@@ -1,11 +1,11 @@
 import React from 'react';
-import BookingList from './BookingList';
+import HomeDashboard from '../components/Home/HomeDashboard.jsx';
 
 
 const Home = () => {
   return (
     <>
-    home
+      <HomeDashboard />
     </>
   );
 }

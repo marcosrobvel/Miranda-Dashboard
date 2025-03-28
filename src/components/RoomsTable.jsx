@@ -5,7 +5,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { StyledTableCell } from './BookingTable';
+import { StyledTableCell, StyledTableCellHead } from './styled-components/BookingTable';
 import { Table } from '@mui/material';
 
 
@@ -15,14 +15,14 @@ export default function RoomsTable(props) {
         <Table sx={{ minWidth: 650 }} aria-label="rooms table" >
             <TableHead>
             <TableRow>
-                <StyledTableCell sx={{ fontWeight: 'bold' }}>ID</StyledTableCell>
-                <StyledTableCell sx={{ fontWeight: 'bold' }}>Photo</StyledTableCell>
-                <StyledTableCell sx={{ fontWeight: 'bold' }}>Room Number</StyledTableCell>
-                <StyledTableCell sx={{ fontWeight: 'bold' }}>Room Type</StyledTableCell>
-                <StyledTableCell sx={{ fontWeight: 'bold' }}>Amenities</StyledTableCell>
-                <StyledTableCell sx={{ fontWeight: 'bold' }}>Price</StyledTableCell>
-                <StyledTableCell sx={{ fontWeight: 'bold' }}>Offer Price</StyledTableCell>
-                <StyledTableCell sx={{ fontWeight: 'bold' }}>Status</StyledTableCell>
+                <StyledTableCellHead>ID</StyledTableCellHead>
+                <StyledTableCellHead>Photo</StyledTableCellHead>
+                <StyledTableCellHead>Room Number</StyledTableCellHead>
+                <StyledTableCellHead>Room Type</StyledTableCellHead>
+                <StyledTableCellHead>Amenities</StyledTableCellHead>
+                <StyledTableCellHead>Price</StyledTableCellHead>
+                <StyledTableCellHead>Offer Price</StyledTableCellHead>
+                <StyledTableCellHead>Status</StyledTableCellHead>
             </TableRow>
             </TableHead>
             <TableBody>

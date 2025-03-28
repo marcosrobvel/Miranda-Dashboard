@@ -4,7 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { useDarkTheme } from '../context/DarkTheme';
-import { StyledBox, StyledTab } from './BookingTabs';
+import { StyledTab } from './styled-components/BookingTabs.js';
 import ContactTable from './ContactTable';
 
 function CustomTabPanel(props) {
@@ -37,6 +37,7 @@ function a11yProps(index) {
 }
 
 export default function ContactTabs(props) {
+
   const [value, setValue] = React.useState(0);
   const { darkTheme } = useDarkTheme();
 
@@ -61,7 +62,7 @@ export default function ContactTabs(props) {
         </Tabs>
       </StyledBox>
       <CustomTabPanel value={value} index={0}>
-        <ContactTable contactData={props.contactData}/>
+        <ContactTable contactData={props.contactData.filter((item) => item.status !== "archived")}/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <ContactTable contactData={props.contactData.filter((item) => item.status === "archived")}/>

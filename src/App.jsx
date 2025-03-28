@@ -1,10 +1,8 @@
-import { useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Header from "./components/Header.jsx";
 import BookingList from "./pages/BookingList.jsx";
-import MenuDrawer from "./components/MenuDrawer.jsx";
 import { DarkThemeProvider } from "./context/DarkTheme.jsx";
 import RoomsList from "./pages/RoomsList.jsx";
 import UsersList from "./pages/UsersList.jsx";

@@ -5,7 +5,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { StyledTableCell } from './BookingTable';
+import { StyledTableCell, StyledTableCellHead } from './styled-components/BookingTable';
 import { Table } from '@mui/material';
 
 
@@ -15,14 +15,14 @@ export default function UsersTable(props) {
       <Table sx={{ minWidth: 650 }} aria-label="users table" >
         <TableHead>
           <TableRow>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>Photo</StyledTableCell>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>ID</StyledTableCell>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>Name</StyledTableCell>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>Email</StyledTableCell>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>Job Desk Description</StyledTableCell>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>Start Date</StyledTableCell>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>Contact</StyledTableCell>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>Status</StyledTableCell>
+            <StyledTableCellHead>Photo</StyledTableCellHead>
+            <StyledTableCellHead>ID</StyledTableCellHead>
+            <StyledTableCellHead>Name</StyledTableCellHead>
+            <StyledTableCellHead>Email</StyledTableCellHead>
+            <StyledTableCellHead>Job Desk Description</StyledTableCellHead>
+            <StyledTableCellHead>Start Date</StyledTableCellHead>
+            <StyledTableCellHead>Contact</StyledTableCellHead>
+            <StyledTableCellHead>Status</StyledTableCellHead>
           </TableRow>
         </TableHead>
         <TableBody>

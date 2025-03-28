@@ -5,8 +5,9 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { StyledTableCell } from './BookingTable';
+
 import { Table } from '@mui/material';
+import { StyledTableCell, StyledTableCellHead } from './styled-components/BookingTable';
 
 
 export default function BookingTable(props) {
@@ -15,13 +16,13 @@ export default function BookingTable(props) {
       <Table sx={{ minWidth: 650 }} aria-label="booking table" >
         <TableHead>
           <TableRow>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>Guest</StyledTableCell>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>Order Date</StyledTableCell>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>Check In</StyledTableCell>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>Check Out</StyledTableCell>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>Special Request</StyledTableCell>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>Room Type</StyledTableCell>
-            <StyledTableCell sx={{ fontWeight: 'bold' }}>Status</StyledTableCell>
+            <StyledTableCellHead>Guest</StyledTableCellHead>
+            <StyledTableCellHead>Order Date</StyledTableCellHead>
+            <StyledTableCellHead>Check In</StyledTableCellHead>
+            <StyledTableCellHead>Check Out</StyledTableCellHead>
+            <StyledTableCellHead>Special Request</StyledTableCellHead>
+            <StyledTableCellHead>Room Type</StyledTableCellHead>
+            <StyledTableCellHead>Status</StyledTableCellHead>
           </TableRow>
         </TableHead>
         <TableBody>
