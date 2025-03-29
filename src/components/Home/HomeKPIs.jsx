@@ -1,52 +1,64 @@
 import { IoBedOutline } from "react-icons/io5";
-import bookingsData from "../../pages/BookingList";
-import roomsData from "../../data/rooms";
-import { StyledDiv } from "../styled-components/HomeKPIs";
+import { StyledBackgroundKPIs, StyledDiv, StyledKPIsContainer } from "../styled-components/HomeKPIs";
+import booking from "../../data/booking.json";
+import { PiCalendarCheck } from "react-icons/pi";
+import { TbLogin, TbLogin2 } from "react-icons/tb";
 
 export default function HomeKPIs() {
 
-    const bookedRooms = bookingsData.filter((booking) => booking.status === "in").length;
-    const totalRooms = bookingsData.length; 
-    const occupancyRate = (bookedRooms / totalRooms) * 100;
+    const bookingsData = JSON.parse(JSON.stringify(booking));
 
+    const checkIn = bookingsData.filter(booking => booking.bookStatus === "in").length;
+    const checkOut = bookingsData.filter(booking => booking.bookStatus === "out").length;
+    const totalRooms = bookingsData.length; 
+    const occupancyRate = (checkIn / totalRooms) * 100;
+    
     return (
-        <>
-        <StyledDiv className="KPIs-container">
-            <div className="KPIs-container__newBooking">
-                <IoBedOutline className="KPIs-container__newBooking__icon"/>
-                <div className="KPIs-container__newBooking__text">
-                    <h2>{bookingsData.length}</h2>
-                    <p>New Booking</p>
+    <StyledKPIsContainer>
+        <StyledBackgroundKPIs>
+            <StyledDiv className="KPIs-container">
+                <div className="KPIs-container__newBooking">
+                    <IoBedOutline className="KPIs-container__newBooking__icon"/>
+                    <div className="KPIs-container__newBooking__text">
+                        <h2>{totalRooms}</h2>
+                        <p>New Booking</p>
+                    </div>
                 </div>
-            </div>
-        </StyledDiv>
-        <StyledDiv className="KPIs-container">
-            <div className="KPIs-container__newBooking">
-                <IoBedOutline className="KPIs-container__newBooking__icon"/>
-                <div className="KPIs-container__newBooking__text">
-                    <h2>{roomsData.length}</h2>
-                    <p>Scheduled Room</p>
+            </StyledDiv>
+        </StyledBackgroundKPIs>
+        <StyledBackgroundKPIs>
+            <StyledDiv className="KPIs-container">
+                <div className="KPIs-container__newBooking">
+                    <PiCalendarCheck className="KPIs-container__newBooking__icon"/>
+                    <div className="KPIs-container__newBooking__text">
+                        <h2>{occupancyRate}</h2>
+                        <p>Scheduled Room</p>
+                    </div>
                 </div>
-            </div>
-        </StyledDiv>
-        <StyledDiv className="KPIs-container">
-            <div className="KPIs-container__newBooking">
-                <IoBedOutline className="KPIs-container__newBooking__icon"/>
-                <div className="KPIs-container__newBooking__text">
-                    <h2>{occupancyRate}</h2>
-                    <p>Check In</p>
+            </StyledDiv>
+        </StyledBackgroundKPIs>
+        <StyledBackgroundKPIs>
+            <StyledDiv className="KPIs-container">
+                <div className="KPIs-container__newBooking">
+                    <TbLogin2 className="KPIs-container__newBooking__icon"/>
+                    <div className="KPIs-container__newBooking__text">
+                        <h2>{checkIn}</h2>
+                        <p>Check In</p>
+                    </div>
                 </div>
-            </div>
-        </StyledDiv>
-        <StyledDiv className="KPIs-container">
-            <div className="KPIs-container__newBooking">
-                <IoBedOutline className="KPIs-container__newBooking__icon"/>
-                <div className="KPIs-container__newBooking__text">
-                    <h2>{bookingsData.length}</h2>
-                    <p>Check Out</p>
+            </StyledDiv>
+        </StyledBackgroundKPIs>
+        <StyledBackgroundKPIs>
+            <StyledDiv className="KPIs-container">
+                <div className="KPIs-container__newBooking">
+                    <TbLogin className="KPIs-container__newBooking__icon"/>
+                    <div className="KPIs-container__newBooking__text">
+                        <h2>{checkOut}</h2>
+                        <p>Check Out</p>
+                    </div>
                 </div>
-            </div>
-        </StyledDiv>
-        </>
+            </StyledDiv>
+        </StyledBackgroundKPIs>
+    </StyledKPIsContainer >
     )
 }

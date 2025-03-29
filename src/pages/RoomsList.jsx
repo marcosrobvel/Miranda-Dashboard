@@ -1,5 +1,5 @@
 import * as React from "react";
-import roomsData from "../data/rooms.js";
+import roomsData from "../data/rooms.json";
 import RoomsTable from "../components/RoomsTable.jsx";
 
 export default function RoomsList() {

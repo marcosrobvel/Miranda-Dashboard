@@ -1,3 +1,4 @@
+import { StyledBackground } from "../styled-components/HomeKPIs";
 import HomeKPIs from "./HomeKPIs";
 
 
@@ -5,9 +6,9 @@ import HomeKPIs from "./HomeKPIs";
 export default function HomeDashboard() {
   return (
     <>
-      <div className="HomeDashboard-container">
+      <StyledBackground className="HomeDashboard-container">
           <HomeKPIs />
-      </div>
+      </StyledBackground>
     </>
   );
 }

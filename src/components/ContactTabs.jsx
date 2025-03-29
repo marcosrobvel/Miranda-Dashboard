@@ -1,11 +1,8 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import { useDarkTheme } from '../context/DarkTheme';
-import { StyledTab } from './styled-components/BookingTabs.js';
-import ContactTable from './ContactTable';
+import * as React from "react";
+import PropTypes from "prop-types";
+import { useDarkTheme } from "../context/DarkTheme";
+import { StyledContainer, StyledDiv, StyledTab } from "./styled-components/BookingTabs.js";
+import ContactTable from "./ContactTable";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -18,7 +15,7 @@ function CustomTabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <div>{children}</div>}
     </div>
   );
 }
@@ -32,12 +29,11 @@ CustomTabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
 export default function ContactTabs(props) {
-
   const [value, setValue] = React.useState(0);
   const { darkTheme } = useDarkTheme();
 
@@ -46,27 +42,54 @@ export default function ContactTabs(props) {
   };
 
   const tabStyle = {
-    color: darkTheme ? 'white' : 'black', 
-    '&.Mui-selected': {
-      backgroundColor: darkTheme ? '#333' : '#f5f5f5', 
-      color: darkTheme ? 'white' : 'black',
+    color: darkTheme ? "white" : "black",
+    "&.Mui-selected": {
+      backgroundColor: darkTheme ? "#333" : "#f5f5f5",
+      color: darkTheme ? "white" : "black",
     },
   };
 
   return (
-    <Box>
-      <StyledBox sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <StyledTab label="All Contacts" {...a11yProps(0)} sx={tabStyle} />
-          <StyledTab label="Archived" {...a11yProps(1)} sx={tabStyle} />
-        </Tabs>
-      </StyledBox>
+    <StyledContainer>
+      <StyledDiv role="tablist">
+        <StyledTab
+          className={`tabs-table selection ${value === 0 ? "active" : ""}`}
+          role="tab"
+          aria-selected={value === 0}
+          $active={value === 0}
+          $darkTheme={darkTheme}
+          onClick={() => handleChange(null, 0)}
+          {...a11yProps(0)}
+        >
+          All Contacts
+        </StyledTab>
+        <StyledTab
+          className={`tabs-table selection ${value === 1 ? "active" : ""}`}
+          role="tab"
+          aria-selected={value === 1}
+          $active={value === 1}
+          $darkTheme={darkTheme}
+          onClick={() => handleChange(null, 1)}
+          {...a11yProps(1)}
+        >
+          Archived
+        </StyledTab>
+      </StyledDiv>
+
       <CustomTabPanel value={value} index={0}>
-        <ContactTable contactData={props.contactData.filter((item) => item.status !== "archived")}/>
+        <ContactTable
+          contactData={props.contactData.filter(
+            (item) => item.status !== "archived"
+          )}
+        />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <ContactTable contactData={props.contactData.filter((item) => item.status === "archived")}/>
+        <ContactTable
+          contactData={props.contactData.filter(
+            (item) => item.status === "archived"
+          )}
+        />
       </CustomTabPanel>
-    </Box>
+    </StyledContainer>
   );
 }
