@@ -23,6 +23,7 @@ export default function BookingTable(props) {
             <StyledTableCellHead>Special Request</StyledTableCellHead>
             <StyledTableCellHead>Room Type</StyledTableCellHead>
             <StyledTableCellHead>Status</StyledTableCellHead>
+            <StyledTableCellHead></StyledTableCellHead>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -39,6 +40,7 @@ export default function BookingTable(props) {
                 <StyledTableCell>{booking.special}</StyledTableCell>
                 <StyledTableCell>{booking.roomType} - {booking.roomNumber}</StyledTableCell>
                 <StyledTableCell>{booking.bookStatus}</StyledTableCell>
+                <StyledTableCell></StyledTableCell>
               </TableRow>
             ))
           ) : (

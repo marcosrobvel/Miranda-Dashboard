@@ -9,26 +9,30 @@ import UsersList from "./pages/UsersList.jsx";
 import Contact from "./pages/Contact.jsx";
 import { AuthProvider, useAuth } from "./context/AuthContext.jsx";
 import Login from "./components/login/Login.jsx";
+import { Provider } from "react-redux";
+import { store } from "./app/store.js";
 
 
 function App() {
   return (
-    <AuthProvider>
-      <DarkThemeProvider>
-        <Router>
-          <Routes>
-            <Route path="/" element={<ProtectedLayout />}>
-              <Route index element={<Home />} />
-              <Route path="/bookings" element={<BookingList />} />
-              <Route path="/rooms" element={<RoomsList />} />
-              <Route path="/users" element={<UsersList />} />
-              <Route path="/contact" element={<Contact />} />
-            </Route>
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </Router>
-      </DarkThemeProvider>
-    </AuthProvider>
+    <Provider store={store}>
+      <AuthProvider>
+        <DarkThemeProvider>
+          <Router>
+            <Routes>
+              <Route path="/" element={<ProtectedLayout />}>
+                <Route index element={<Home />} />
+                <Route path="/bookings" element={<BookingList />} />
+                <Route path="/rooms" element={<RoomsList />} />
+                <Route path="/users" element={<UsersList />} />
+                <Route path="/contact" element={<Contact />} />
+              </Route>
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </Router>
+        </DarkThemeProvider>
+      </AuthProvider>
+    </Provider>
   );
 }
 

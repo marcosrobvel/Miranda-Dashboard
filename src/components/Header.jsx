@@ -17,7 +17,8 @@ import { FaRegHeart } from "react-icons/fa";
 import { TbLogout } from "react-icons/tb";
 import { useDarkTheme } from "../context/DarkTheme";
 import { BsFillMoonStarsFill } from "react-icons/bs";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -53,6 +54,8 @@ export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [pageTitle, setPageTitle] = React.useState("Dashboard");
   const location = useLocation();
+  const { logout } = useAuth(); 
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     switch (location.pathname) {
@@ -82,6 +85,11 @@ export default function Header() {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
   };
 
   const menuId = "primary-search-account-menu";
@@ -141,6 +149,8 @@ export default function Header() {
               </Badge>
             </IconButton>
             <IconButton
+              onClick={handleLogout}
+              aria-label="logout"
               size="large"
               color="inherit">
               <TbLogout />
