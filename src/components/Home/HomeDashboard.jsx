@@ -1,5 +1,6 @@
 import { StyledBackground } from "../styled-components/HomeKPIs";
 import HomeKPIs from "./HomeKPIs";
+import SliderReviews from "./Reviews/SliderReviews";
 
 
 
@@ -8,6 +9,7 @@ export default function HomeDashboard() {
     <>
       <StyledBackground className="HomeDashboard-container">
           <HomeKPIs />
+          <SliderReviews />
       </StyledBackground>
     </>
   );
