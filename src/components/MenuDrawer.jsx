@@ -13,8 +13,9 @@ import { SlKey } from "react-icons/sl";
 import { FaRegCalendarCheck, FaUsers } from "react-icons/fa";
 import { FiAtSign } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { PermanentDrawer } from "./styled-components/Drawer";
 
-export default function MenuDrawer() {
+export default function MenuDrawer({drawerOpen, setDrawerOpen}) {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
@@ -81,9 +82,17 @@ export default function MenuDrawer() {
       >
         <HiOutlineMenuAlt2 />
       </IconButton>
-      <Drawer open={open} onClose={toggleDrawer(false)}>
+      <PermanentDrawer variant="temporary"
+          open={open}
+          onClose={toggleDrawer(false)}
+          ModalProps={{
+          keepMounted: true, 
+          BackdropProps: {
+            invisible: true, 
+          },
+        }}>
         {DrawerList}
-      </Drawer>
+      </PermanentDrawer>
     </div>
   );
 }

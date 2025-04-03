@@ -28,3 +28,19 @@ export const StyledTab = styled.div`
       }
   
 `;
+
+export const StyledButton = styled.button`
+    margin-left: auto;
+    margin-right: 60px;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: 'Poppins';
+    background-color: #135846;
+    color: white;
+    border-radius: 5px;
+
+    &:hover {
+      transform: scale(1.15);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+`;

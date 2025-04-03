@@ -11,9 +11,12 @@ import { AuthProvider, useAuth } from "./context/AuthContext.jsx";
 import Login from "./components/login/Login.jsx";
 import { Provider } from "react-redux";
 import { store } from "./app/store.js";
+import NewBooking from "./pages/NewBooking.jsx";
 
 
 function App() {
+
+
   return (
     <Provider store={store}>
       <AuthProvider>
@@ -26,6 +29,7 @@ function App() {
                 <Route path="/rooms" element={<RoomsList />} />
                 <Route path="/users" element={<UsersList />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/newbooking" element={<NewBooking />} />
               </Route>
               <Route path="/login" element={<Login />} />
             </Routes>

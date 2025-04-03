@@ -2,10 +2,12 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import { useDarkTheme } from "../context/DarkTheme";
 import BookingTable from "./BookingTable.jsx";
-import { StyledContainer, StyledDiv, StyledTab } from "./styled-components/BookingTabs";
+import { StyledButton, StyledContainer, StyledDiv, StyledTab } from "./styled-components/BookingTabs";
+import { useNavigate } from "react-router-dom";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
+  
 
   return (
     <div
@@ -40,6 +42,12 @@ export default function BookingTabs(props) {
   const handleChange = (newValue) => {
     setValue(newValue);
   };
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    
+    navigate('/newbooking');
+  }
 
   return (
     <StyledContainer>
@@ -85,7 +93,12 @@ export default function BookingTabs(props) {
           >
             In Progress
           </StyledTab>
+          
+          <StyledButton onClick={handleClick}>
+            New Booking
+          </StyledButton>
         </StyledDiv>
+        
       </div>
       <CustomTabPanel value={value} index={0}>
         <BookingTable bookingsData={props.bookingsData} />

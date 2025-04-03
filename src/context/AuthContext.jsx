@@ -53,7 +53,6 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Hook para acceder al contexto
 export const useAuth = () => {
   return useContext(AuthContext);
 };

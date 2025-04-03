@@ -13,3 +13,10 @@ export const StyledTableCellHead = styled(TableCell)`
         font-weight: bold;
     }
 `;
+
+export const StyledDiv = styled.div`
+    font-size: 16px;
+    & .pencilIcon:hover, .trashIcon:hover{
+        cursor: pointer;
+    }
+`;
