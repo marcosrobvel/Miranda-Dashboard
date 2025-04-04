@@ -17,8 +17,6 @@ export default function ContactTable(props) {
         e.target.style.color = 'white';
     }
 
-    console.log(props.contactData);
-
   return (
     <TableContainer component={Paper} sx={{ maxWidth: '100%', margin: 'auto', boxShadow: 3 }}>
       <Table sx={{ minWidth: 650 }} aria-label="contact table" >

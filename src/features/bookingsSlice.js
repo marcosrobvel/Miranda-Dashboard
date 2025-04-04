@@ -1,12 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createBooking, deleteBooking } from './bookingsThunks'; 
+import bookingData from '../data/booking.json';
 
 const getNextId = (bookings) => {
-  if (bookings.length === 0) return 1;
+  if (!bookings || !Array.isArray(bookings) || bookings.length === 0) {
+    return 1; 
+  }
   const maxId = Math.max(...bookings.map(b => {
     const idNum = typeof b.id === 'number' ? b.id : parseInt(b.id.toString().replace(/\D/g, ''));
     return isNaN(idNum) ? 0 : idNum;
   }));
-  return maxId + 1;
+  
+  return maxId + 1; 
 };
 
 const getCurrentDateFormatted = () => {
@@ -17,54 +22,75 @@ const getCurrentDateFormatted = () => {
   return `${day}-${month}-${year}`;
 };
 
-const loadBookings = () => {
-  try {
-    const saved = localStorage.getItem('bookings');
-    return saved ? JSON.parse(saved) : [];
-  } catch (error) {
-    console.error("Error loading bookings:", error);
-    return [];
+export const fetchBookings = createAsyncThunk(
+  'booking/fetchBookings',
+  async (_, { rejectWithValue }) => {
+    try {
+      return bookingData;
+    } catch (error) {
+      return rejectWithValue('Failed to fetch bookings');
+    }
   }
-};
+);
 
 const initialState = {
-  bookings: loadBookings(),
-  status: 'idle'
+  bookings: [],
+  status: 'idle',
+  error: null
 };
 
 const bookingsSlice = createSlice({
-  name: 'bookings',
+  name: 'booking',
   initialState,
-  reducers: {
-    addBooking: (state, action) => {
-      const nextId = getNextId(state.bookings);
-      const newBooking = {
-        ...action.payload,
-        id: nextId,
-        orderDate: getCurrentDateFormatted(),
-        bookStatus: action.payload.status || 'in' 
-      };
-      
-      state.bookings.push(newBooking);
-      localStorage.setItem('bookings', JSON.stringify(state.bookings));
-      alert("Book created correctly, to find your book go to the end of the bookings.");
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchBookings.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchBookings.fulfilled, (state, action) => {
+        state.status = 'fulfilled';
+        state.bookings = [...action.payload];
+      })
+      .addCase(fetchBookings.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
 
-      setTimeout(() => {
-        const lastBookingElement = document.querySelector('.booking-item:last-child');
-        
-        if (lastBookingElement) {
-          lastBookingElement.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 200);
-    },
-    deleteBooking: (state, action) => {
-      state.bookings = state.bookings.filter(
-        booking => booking.id !== action.payload
-      );
-      localStorage.setItem('bookings', JSON.stringify(state.bookings));
-    }
+
+      .addCase(createBooking.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(createBooking.fulfilled, (state, action) => {
+        state.status = 'fulfilled';
+        const newBooking = {
+          ...action.payload,
+          id: getNextId(state.bookings),
+          orderDate: getCurrentDateFormatted(),
+          bookStatus: action.payload.status || 'in',
+          roomNumber: getNextId(state.bookings)
+        };
+        state.bookings = [...state.bookings, newBooking];
+      })
+      .addCase(createBooking.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      
+
+
+
+      .addCase(deleteBooking.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(deleteBooking.fulfilled, (state, action) => {
+        state.status = 'fulfilled';
+        state.bookings = state.bookings.filter(bookings => bookings.id !== action.payload);
+      })
+      .addCase(deleteBooking.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
   }
 });
 
-export const { addBooking, deleteBooking } = bookingsSlice.actions;
 export default bookingsSlice.reducer;

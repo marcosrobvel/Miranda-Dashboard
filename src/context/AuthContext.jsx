@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }) => {
     if (username === 'admin' && password === 'admin') {
       const user = { username };
       dispatch({ type: actionTypes.LOGIN, payload: user });
+      localStorage.setItem('logged', true);
       return true;
     }
     return false;
@@ -40,6 +41,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     dispatch({ type: actionTypes.LOGOUT });
+    localStorage.removeItem('logged');
   };
 
   const updateUser = (userData) => {

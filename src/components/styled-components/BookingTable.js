@@ -16,7 +16,13 @@ export const StyledTableCellHead = styled(TableCell)`
 
 export const StyledDiv = styled.div`
     font-size: 16px;
-    & .pencilIcon:hover, .trashIcon:hover{
+
+    & .pencil-icon, .trash-icon{
+        margin-left: 10px;
+    }
+
+    & .pencil-icon:hover, .trash-icon:hover{
         cursor: pointer;
+        
     }
 `;

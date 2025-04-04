@@ -42,7 +42,8 @@ function App() {
 
 const ProtectedLayout = () => {
   const { state } = useAuth();
-  if (!state.isAuthenticated) {
+  const logged = localStorage.getItem('logged');
+  if (!state.isAuthenticated && !logged) {
     return <Navigate to="/login" replace />;
   }
   return (

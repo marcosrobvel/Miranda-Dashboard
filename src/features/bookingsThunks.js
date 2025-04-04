@@ -1,25 +1,33 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { addBooking } from './bookingsSlice';
 
 export const createBooking = createAsyncThunk(
-  'bookings/createBooking',
-  async (bookingData, { dispatch }) => {
+  'booking/createBooking',
+  async (bookingsData, { rejectWithValue }) => {
     try {
       const formattedBooking = {
-        guest: bookingData.guest,
-        check_in: bookingData.check_in,
-        check_out: bookingData.check_out,
-        room_type: bookingData.room_type,
-        special_request: bookingData.special_request,
-        status: bookingData.status,
-        roomNumber: '', 
+        guest: bookingsData.guest,
+        checkIn: bookingsData.check_in,
+        checkOut: bookingsData.check_out,
+        roomType: bookingsData.room_type,
+        special: bookingsData.special_request,
+        status: bookingsData.status || 'in',
         orderDate: new Date().toISOString()
       };
-      
-      dispatch(addBooking(formattedBooking));
+
       return formattedBooking;
     } catch (error) {
-      throw new Error('Failed to create booking');
+      return rejectWithValue('Failed to create booking');
+    }
+  }
+);
+
+export const deleteBooking = createAsyncThunk(
+  'booking/deleteBooking',
+  async (bookingId, { rejectWithValue }) => {
+    try {
+      return bookingId;
+    } catch (error) {
+      return rejectWithValue('Failed to delete booking');
     }
   }
 );

@@ -10,7 +10,7 @@ import { StyledDiv, StyledTableCell, StyledTableCellHead } from './styled-compon
 import { FaPencil } from 'react-icons/fa6';
 import { GoTrash } from 'react-icons/go';
 import { useDispatch } from 'react-redux';
-import { deleteBooking } from '../features/bookingsSlice';
+import { deleteBooking } from '../features/bookingsThunks';
 
 export default function BookingTable({ bookingsData }) {
   const dispatch = useDispatch();
@@ -50,16 +50,7 @@ export default function BookingTable({ bookingsData }) {
                 <StyledTableCell>{booking.special || booking.special_request || '-'}</StyledTableCell>
                 <StyledTableCell>{booking.roomType} {booking.roomNumber ? `- ${booking.roomNumber}` : ''}</StyledTableCell>
                 <StyledTableCell>
-                  <span style={{
-                    padding: '4px 8px',
-                    borderRadius: '4px',
-                    backgroundColor: 
-                      booking.bookStatus === 'in' ? '#e6f7ee' :
-                      booking.bookStatus === 'out' ? '#fff1f0' : '#fff7e6',
-                    color:
-                      booking.bookStatus === 'in' ? '#087f5b' :
-                      booking.bookStatus === 'out' ? '#c92a2a' : '#e67700'
-                  }}>
+                  <span>
                     {booking.bookStatus}
                   </span>
                 </StyledTableCell>
@@ -69,7 +60,6 @@ export default function BookingTable({ bookingsData }) {
                     <GoTrash 
                       className='trash-icon' 
                       onClick={() => handleDelete(booking.id)}
-                      style={{ color: '#ff6b6b', cursor: 'pointer', marginLeft: '20px' }}
                     />
                   </StyledDiv>
                 </StyledTableCell>
