@@ -12,6 +12,7 @@ import Login from "./components/login/Login.jsx";
 import { Provider } from "react-redux";
 import { store } from "./app/store.js";
 import NewBooking from "./pages/NewBooking.jsx";
+import EditBooking from "./pages/UpdateBooking.jsx";
 
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
                 <Route path="/users" element={<UsersList />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/newbooking" element={<NewBooking />} />
+                <Route path="/editbooking" element={<EditBooking />} />
+
               </Route>
               <Route path="/login" element={<Login />} />
             </Routes>

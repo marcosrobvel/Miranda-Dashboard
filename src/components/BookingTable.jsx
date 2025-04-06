@@ -11,14 +11,20 @@ import { FaPencil } from 'react-icons/fa6';
 import { GoTrash } from 'react-icons/go';
 import { useDispatch } from 'react-redux';
 import { deleteBooking } from '../features/bookingsThunks';
+import { useNavigate } from 'react-router-dom';
 
 export default function BookingTable({ bookingsData }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this booking?')) {
       dispatch(deleteBooking(id));
     }
+  };
+
+  const handleEdit = (booking) => {
+    navigate('/editbooking', { state: { booking } });
   };
 
   return (
@@ -56,7 +62,9 @@ export default function BookingTable({ bookingsData }) {
                 </StyledTableCell>
                 <StyledTableCell>
                   <StyledDiv>
-                    <FaPencil className='pencil-icon' />
+                    <FaPencil className='pencil-icon' 
+                    onClick={() => handleEdit(booking)}
+                    />
                     <GoTrash 
                       className='trash-icon' 
                       onClick={() => handleDelete(booking.id)}
