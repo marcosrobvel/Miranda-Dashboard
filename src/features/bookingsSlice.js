@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { createBooking, deleteBooking } from './bookingsThunks'; 
+import { createBooking, deleteBooking, updateBooking } from './bookingsThunks'; 
 import bookingData from '../data/booking.json';
 
 const getNextId = (bookings) => {
@@ -87,6 +87,32 @@ const bookingsSlice = createSlice({
         state.bookings = state.bookings.filter(bookings => bookings.id !== action.payload);
       })
       .addCase(deleteBooking.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+
+
+
+      .addCase(updateBooking.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateBooking.fulfilled, (state, action) => {
+        state.status = 'fulfilled';
+        
+        const originalBooking = state.bookings.find(b => b.id === action.payload.id);
+        
+        const updatedBooking = {
+          ...action.payload,
+          bookStatus: action.payload.status || 'in',
+          roomNumber: originalBooking?.roomNumber || getNextId(state.bookings),
+          orderDate: originalBooking ? getCurrentDateFormatted(new Date(originalBooking.orderDate)) : getCurrentDateFormatted()
+        };
+        
+        state.bookings = state.bookings.map(booking => 
+          booking.id === action.payload.id ? updatedBooking : booking
+        );
+      })
+      .addCase(updateBooking.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });

@@ -32,3 +32,24 @@ export const deleteBooking = createAsyncThunk(
   }
 );
 
+export const updateBooking = createAsyncThunk(
+  'booking/updateBooking',
+  async (bookingData, { rejectWithValue }) => {
+    try {
+      const formattedBooking = {
+        id: bookingData.id,
+        guest: bookingData.guest,
+        checkIn: bookingData.check_in,
+        checkOut: bookingData.check_out,
+        roomType: bookingData.room_type,
+        special: bookingData.special_request,
+        status: bookingData.status || 'in',
+        orderDate: bookingData.orderDate || new Date().toISOString()
+      };
+
+      return formattedBooking;
+    } catch (error) {
+      return rejectWithValue('Failed to update booking');
+    }
+  }
+);
