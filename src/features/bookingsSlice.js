@@ -105,7 +105,8 @@ const bookingsSlice = createSlice({
           ...action.payload,
           bookStatus: action.payload.status || 'in',
           roomNumber: originalBooking?.roomNumber || getNextId(state.bookings),
-          orderDate: originalBooking ? getCurrentDateFormatted(new Date(originalBooking.orderDate)) : getCurrentDateFormatted()
+          orderDate: originalBooking ? getCurrentDateFormatted(new Date(originalBooking.orderDate)) : getCurrentDateFormatted(),
+          special: action.payload.special || action.payload.special_request || originalBooking?.special || originalBooking?.special_request || '-'
         };
         
         state.bookings = state.bookings.map(booking => 
