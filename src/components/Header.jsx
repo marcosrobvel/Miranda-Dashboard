@@ -152,7 +152,8 @@ export default function Header() {
               onClick={handleLogout}
               aria-label="logout"
               size="large"
-              color="inherit">
+              color="inherit"
+              data-testid="logout-icon">
               <TbLogout />
             </IconButton>
             
