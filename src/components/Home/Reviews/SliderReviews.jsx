@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CardReview from "./CardReview";
-import contactData from '../../../data/contact.json'
+import contactData from '../../../data/contact'
 import { StyledButton, StyledCard, StyledDiv, StyledParaph, StyledSlider } from "../../styled-components/HomeSlider";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 

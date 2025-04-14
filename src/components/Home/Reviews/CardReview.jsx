@@ -1,4 +1,4 @@
-import contactData from '../../../data/contact.json'
+import contactData from '../../../data/contact'
 import { StyledCardInfo } from '../../styled-components/HomeSlider'
 
 export default function CardReview({ subject, comment, name, email, phone }) {

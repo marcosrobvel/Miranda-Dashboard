@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { createBooking, deleteBooking, updateBooking } from './bookingsThunks'; 
-import bookingData from '../data/booking.json';
+import bookingData from '../data/booking';
 
 const getNextId = (bookings) => {
   if (!bookings || !Array.isArray(bookings) || bookings.length === 0) {

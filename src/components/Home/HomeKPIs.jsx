@@ -1,6 +1,6 @@
 import { IoBedOutline } from "react-icons/io5";
 import { StyledBackgroundKPIs, StyledDiv, StyledKPIsContainer } from "../styled-components/HomeKPIs";
-import booking from "../../data/booking.json";
+import booking from "../../data/booking";
 import { PiCalendarCheck } from "react-icons/pi";
 import { TbLogin, TbLogin2 } from "react-icons/tb";
 
