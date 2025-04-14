@@ -26,6 +26,7 @@ const Login = () => {
       <StyledForm onSubmit={handleSubmit}>
         <div>
           <input
+            data-testid="username-input"
             placeholder='Username'
             type="text"
             value={username}
@@ -34,13 +35,14 @@ const Login = () => {
         </div>
         <div>
           <input
+            data-testid="password-input"
             placeholder='Password'
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" data-testid="loginBtn">Submit</button>
       </StyledForm>
     </StyledLogin>
   );

@@ -12,10 +12,10 @@ describe('Login', () => {
   it("User can login with correct credentials", () => {
     cy.visit("http://localhost:5173/login");
 
-    cy.get('input[placeholder="Username"]').type("admin");
-    cy.get('input[placeholder="Password"]').type("admin");
+    cy.get('[data-testid="username-input"]').type("admin");
+    cy.get('[data-testid="password-input"]').type("admin");
 
-    cy.get('button[type="submit"]').click();
+    cy.get('[data-testid="loginBtn"]').click();
 
     cy.url().should("include", "http://localhost:5173/");
   });
@@ -25,10 +25,10 @@ describe('Login Error', () => {
   it("User cannot login with incorrect credentials", () => {
     cy.visit("http://localhost:5173/login");
 
-    cy.get('input[placeholder="Username"]').type("wronguser");
-    cy.get('input[placeholder="Password"]').type("wrongpass");
+    cy.get('[data-testid="username-input"]').type("wronguser");
+    cy.get('[data-testid="password-input"]').type("wrongpass");
 
-    cy.get('button[type="submit"]').click();
+    cy.get('[data-testid="loginBtn"]').click();
 
     cy.url().should("include", "http://localhost:5173/login");
   });
@@ -38,10 +38,10 @@ describe('Logout', () => {
   it("User can logout", () => {
     cy.visit("http://localhost:5173/login");
 
-    cy.get('input[placeholder="Username"]').type("admin");
-    cy.get('input[placeholder="Password"]').type("admin");
+    cy.get('[data-testid="username-input"]').type("admin");
+    cy.get('[data-testid="password-input"]').type("admin");
 
-    cy.get('button[type="submit"]').click();
+    cy.get('[data-testid="loginBtn"]').click();
 
     cy.url().should("include", "http://localhost:5173/");
 
