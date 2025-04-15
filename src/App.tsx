@@ -1,23 +1,21 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from "react-router-dom";
-import Home from "./pages/Home.jsx";
-import Header from "./components/Header.jsx";
-import BookingList from "./pages/BookingList.jsx";
-import { DarkThemeProvider } from "./context/DarkTheme.jsx";
-import RoomsList from "./pages/RoomsList.jsx";
-import UsersList from "./pages/UsersList.jsx";
-import Contact from "./pages/Contact.jsx";
-import { AuthProvider, useAuth } from "./context/AuthContext.jsx";
-import Login from "./components/login/Login.jsx";
+import Home from "./pages/Home";
+import Header from "./components/Header";
+import BookingList from "./pages/BookingList";
+import { DarkThemeProvider } from "./context/DarkTheme";
+import RoomsList from "./pages/RoomsList";
+import UsersList from "./pages/UsersList";
+import Contact from "./pages/Contact";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+import Login from "./components/login/Login";
 import { Provider } from "react-redux";
-import { store } from "./app/store.js";
-import NewBooking from "./pages/NewBooking.jsx";
-import EditBooking from "./pages/UpdateBooking.jsx";
+import { store } from "./app/store";
+import NewBooking from "./pages/NewBooking";
+import EditBooking from "./pages/UpdateBooking";
+import React, { JSX } from "react";
 
-
-function App() {
-
-
+function App(): JSX.Element {
   return (
     <Provider store={store}>
       <AuthProvider>
@@ -32,7 +30,6 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/newbooking" element={<NewBooking />} />
                 <Route path="/editbooking" element={<EditBooking />} />
-
               </Route>
               <Route path="/login" element={<Login />} />
             </Routes>
@@ -43,7 +40,7 @@ function App() {
   );
 }
 
-const ProtectedLayout = () => {
+const ProtectedLayout = (): JSX.Element => {
   const { state } = useAuth();
   const logged = localStorage.getItem('logged');
   if (!state.isAuthenticated && !logged) {
@@ -51,8 +48,8 @@ const ProtectedLayout = () => {
   }
   return (
     <>
-      <Header /> 
-      <Outlet /> 
+      <Header />
+      <Outlet />
     </>
   );
 };

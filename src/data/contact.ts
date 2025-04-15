@@ -15,7 +15,7 @@ interface Contact {
   status: ContactStatus;
 }
 
-export const contacts: Contact[] = [
+export const contactData: Contact[] = [
   {
     photo: "https://robohash.org/dictaestqui.png?size=50x50&set=set1",
     id: 1,
