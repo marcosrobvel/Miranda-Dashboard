@@ -8,11 +8,27 @@ import TableRow from '@mui/material/TableRow';
 import { StyledTableCell, StyledTableCellHead } from './styled-components/BookingTable';
 import { Table } from '@mui/material';
 
+// Define the User type
+interface User {
+  id: number;
+  photo: string;
+  name: string;
+  mail: string;
+  job: string;
+  startDate: string;
+  phone: string;
+  status: string;
+}
 
-export default function UsersTable(props) {
+// Define the props for the UsersTable component
+interface UsersTableProps {
+  usersData: User[]; // usersData is an array of User objects
+}
+
+const UsersTable: React.FC<UsersTableProps> = ({ usersData }) => {
   return (
     <TableContainer component={Paper} sx={{ maxWidth: '100%', margin: 'auto', boxShadow: 3 }}>
-      <Table sx={{ minWidth: 650 }} aria-label="users table" >
+      <Table sx={{ minWidth: 650 }} aria-label="users table">
         <TableHead>
           <TableRow>
             <StyledTableCellHead>Photo</StyledTableCellHead>
@@ -26,28 +42,30 @@ export default function UsersTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {Array.isArray(props.usersData) && props.usersData.length > 0 ? (
-            props.usersData.map((users) => (
-              <TableRow key={users.id}>
-                <StyledTableCell>{users.photo}</StyledTableCell>
-                <StyledTableCell>{users.id}</StyledTableCell>
-                <StyledTableCell>{users.name}</StyledTableCell>
-                <StyledTableCell>{users.mail}</StyledTableCell>
-                <StyledTableCell>{users.job}</StyledTableCell>
-                <StyledTableCell>{users.startDate}</StyledTableCell>
-                <StyledTableCell>{users.phone}</StyledTableCell>
-                <StyledTableCell>{users.status}</StyledTableCell>
+          {Array.isArray(usersData) && usersData.length > 0 ? (
+            usersData.map((user) => (
+              <TableRow key={user.id}>
+                <StyledTableCell>{user.photo}</StyledTableCell>
+                <StyledTableCell>{user.id}</StyledTableCell>
+                <StyledTableCell>{user.name}</StyledTableCell>
+                <StyledTableCell>{user.mail}</StyledTableCell>
+                <StyledTableCell>{user.job}</StyledTableCell>
+                <StyledTableCell>{user.startDate}</StyledTableCell>
+                <StyledTableCell>{user.phone}</StyledTableCell>
+                <StyledTableCell>{user.status}</StyledTableCell>
               </TableRow>
             ))
           ) : (
             <TableRow>
               <StyledTableCell colSpan={8} align="center">
-                No hay reservas disponibles.
+                No hay usuarios disponibles.
               </StyledTableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
     </TableContainer>
-  )
-}
+  );
+};
+
+export default UsersTable;

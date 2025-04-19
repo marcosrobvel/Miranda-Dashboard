@@ -11,7 +11,6 @@ export const StyledDiv = styled.div`
     width: 100%;
 `;
 
-
 export const StyledCardInfo = styled.div`
     width: 50%;
     display: flex;            

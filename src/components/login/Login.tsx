@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { StyledForm, StyledLogin } from '../styled-components/Login';
 
-const Login = () => {
+const Login: React.FC = () => {
   const { login } = useAuth();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (login(username, password)) {
       navigate('/');
@@ -27,7 +27,7 @@ const Login = () => {
         <div>
           <input
             data-testid="username-input"
-            placeholder='Username'
+            placeholder="Username"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -36,13 +36,15 @@ const Login = () => {
         <div>
           <input
             data-testid="password-input"
-            placeholder='Password'
+            placeholder="Password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit" data-testid="loginBtn">Submit</button>
+        <button type="submit" data-testid="loginBtn">
+          Submit
+        </button>
       </StyledForm>
     </StyledLogin>
   );

@@ -1,6 +1,5 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -13,31 +12,42 @@ import { SlKey } from "react-icons/sl";
 import { FaRegCalendarCheck, FaUsers } from "react-icons/fa";
 import { FiAtSign } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import { PermanentDrawer } from "./styled-components/Drawer";
+import Drawer from "@mui/material/Drawer";
 
-export default function MenuDrawer({drawerOpen, setDrawerOpen}) {
-  const [open, setOpen] = React.useState(false);
+interface MenuDrawerProps {
+  drawerOpen?: boolean;
+  setDrawerOpen?: (value: boolean) => void;
+}
 
-  const toggleDrawer = (newOpen) => () => {
+interface NavItem {
+  name: string;
+  icon: React.ReactElement;
+  path: string;
+}
+
+const MenuDrawer: React.FC<MenuDrawerProps> = ({ drawerOpen, setDrawerOpen }) => {
+  const [open, setOpen] = React.useState<boolean>(false);
+  const navigate = useNavigate();
+
+  const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
 
-  const navigate = useNavigate(); 
-
-  const handleNavigation = (path) => {
-    navigate(path); 
+  const handleNavigation = (path: string) => {
+    navigate(path);
   };
 
-
-  const list = [
+  const list: NavItem[] = [
     {
       name: "Dashboard",
       icon: <MdOutlineDashboard style={{ width: "25px", height: "25px" }} />,
       path: "/",
     },
-    { name: "Bookings", icon: <FaRegCalendarCheck style={{ width: "25px", height: "25px" }} />,
-    path: "/bookings", 
-  },
+    {
+      name: "Bookings",
+      icon: <FaRegCalendarCheck style={{ width: "25px", height: "25px" }} />,
+      path: "/bookings",
+    },
     {
       name: "Rooms",
       icon: <SlKey style={{ width: "25px", height: "25px" }} />,
@@ -45,12 +55,12 @@ export default function MenuDrawer({drawerOpen, setDrawerOpen}) {
     },
     {
       name: "Contact",
-      icon: <FiAtSign  style={{ width: "25px", height: "25px" }} />,
+      icon: <FiAtSign style={{ width: "25px", height: "25px" }} />,
       path: "/contact",
     },
     {
       name: "Users",
-      icon: <FaUsers style={{ width: "25px", height: "25px"}} />,
+      icon: <FaUsers style={{ width: "25px", height: "25px" }} />,
       path: "/users",
     },
   ];
@@ -82,17 +92,21 @@ export default function MenuDrawer({drawerOpen, setDrawerOpen}) {
       >
         <HiOutlineMenuAlt2 />
       </IconButton>
-      <PermanentDrawer variant="temporary"
-          open={open}
-          onClose={toggleDrawer(false)}
-          ModalProps={{
-          keepMounted: true, 
+      <Drawer
+        variant="temporary"
+        open={open}
+        onClose={toggleDrawer(false)}
+        ModalProps={{
+          keepMounted: true,
           BackdropProps: {
-            invisible: true, 
+            invisible: true,
           },
-        }}>
+        }}
+      >
         {DrawerList}
-      </PermanentDrawer>
+      </Drawer>
     </div>
   );
-}
+};
+
+export default MenuDrawer;

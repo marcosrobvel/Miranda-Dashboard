@@ -10,13 +10,11 @@ import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import { Divider, Menu } from "@mui/material";
 import { MdOutlineEmail } from "react-icons/md";
-import { BiBell, BiCommentDetail } from "react-icons/bi";
-import { IoLogOutOutline, IoSearchOutline } from "react-icons/io5";
-import MenuDrawer from "./MenuDrawer";
-import { FaRegHeart } from "react-icons/fa";
+import { BiBell } from "react-icons/bi";
 import { TbLogout } from "react-icons/tb";
-import { useDarkTheme } from "../context/DarkTheme";
 import { BsFillMoonStarsFill } from "react-icons/bs";
+import MenuDrawer from "./MenuDrawer";
+
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
@@ -49,13 +47,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Header() {
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [pageTitle, setPageTitle] = React.useState("Dashboard");
+const Header: React.FC = () => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [pageTitle, setPageTitle] = React.useState<string>("Dashboard");
   const location = useLocation();
-  const { logout } = useAuth(); 
+  const { logout } = useAuth();
   const navigate = useNavigate();
+
+ // const { darkTheme, toggleTheme } = useDarkTheme();
 
   React.useEffect(() => {
     switch (location.pathname) {
@@ -79,8 +78,6 @@ export default function Header() {
     }
   }, [location.pathname]);
 
-  const { darkTheme, toggleTheme } = useDarkTheme();
-
   const isMenuOpen = Boolean(anchorEl);
 
   const handleMenuClose = () => {
@@ -89,7 +86,7 @@ export default function Header() {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate("/login");
   };
 
   const menuId = "primary-search-account-menu";
@@ -123,27 +120,20 @@ export default function Header() {
             {pageTitle}
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{display: 'flex', gap: '25px'}}>
-            <IconButton size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-              onClick={toggleTheme}>
-              <BsFillMoonStarsFill />
-            </IconButton>
+          <Box sx={{ display: "flex", gap: "25px" }}>
             <IconButton
               size="large"
-              aria-label="show 4 new mails"
+              aria-label="toggle dark mode"
               color="inherit"
             >
+              <BsFillMoonStarsFill />
+            </IconButton>
+            <IconButton size="large" aria-label="show mails" color="inherit">
               <Badge badgeContent={4} color="error">
                 <MdOutlineEmail />
               </Badge>
             </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
+            <IconButton size="large" aria-label="notifications" color="inherit">
               <Badge badgeContent={17} color="error">
                 <BiBell />
               </Badge>
@@ -153,15 +143,16 @@ export default function Header() {
               aria-label="logout"
               size="large"
               color="inherit"
-              data-testid="logout-icon">
+              data-testid="logout-icon"
+            >
               <TbLogout />
             </IconButton>
-            
           </Box>
         </Toolbar>
       </AppBar>
-      
       {renderMenu}
     </Box>
   );
-}
+};
+
+export default Header;

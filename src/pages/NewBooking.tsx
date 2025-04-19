@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateBooking } from '../features/bookingsThunks';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { useDispatch } from 'react-redux';
+import { createBooking } from '../features/bookingsThunks';
 import { DivContainer, StyledButton, StyledDiv, StyledDivNameChecks, StyledDivRoomtypeRequest } from '../components/styled-components/NewBooking';
 
-const EditBooking = () => {
+// Definimos los tipos para el estado del formulario
+interface FormData {
+  guest: string;
+  checkIn: string;
+  checkOut: string;
+  roomType: string;
+  specialRequest: string;
+  status: string;
+}
+
+const NewBooking = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { booking } = location.state || {};
-  
-  const [formData, setFormData] = useState({
-    id: '',
+  const [formData, setFormData] = useState<FormData>({
     guest: '',
     checkIn: '',
     checkOut: '',
@@ -20,44 +24,31 @@ const EditBooking = () => {
     status: 'in'
   });
 
-  useEffect(() => {
-    if (booking) {
-      setFormData({
-        id: booking.id,
-        guest: booking.guest,
-        checkIn: booking.checkIn || booking.check_in,
-        checkOut: booking.checkOut || booking.check_out,
-        roomType: booking.roomType || booking.room_type,
-        specialRequest: booking.specialRequest || booking.special_request || '',
-        status: booking.status || booking.bookStatus || 'in'
-      });
-    }
-  }, [booking]);
-
-  const handleChange = (e) => {
+  // Manejar el cambio en los inputs del formulario
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const formatDate = (dateString) => {
+  // Formatear la fecha en formato MM-DD-YYYY
+  const formatDate = (dateString: string): string => {
     if (!dateString) return '';
-    if (dateString.includes('-')) {
-      const [month, day, year] = dateString.split('-');
-      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-    }
-    return dateString;
+    const [year, month, day] = dateString.split('-');
+    return `${month}-${day}-${year}`;
   };
 
-  const handleSubmit = (e) => {
+  // Manejar el submit del formulario
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-  
+
+    // Validar que todos los campos obligatorios estén completos
     if (!formData.guest || !formData.checkIn || !formData.checkOut || !formData.roomType) {
       alert('Please complete all required fields');
       return;
     }
-  
-    const updatedBooking = {
-      id: formData.id,
+
+    // Crear un objeto con los datos del nuevo booking
+    const newBooking = {
       guest: formData.guest,
       check_in: formatDate(formData.checkIn),
       check_out: formatDate(formData.checkOut),
@@ -65,9 +56,19 @@ const EditBooking = () => {
       special_request: formData.specialRequest,
       status: formData.status.toLowerCase()
     };
-  
-    dispatch(updateBooking(updatedBooking));
-    navigate('/bookings');
+
+    // Despachar la acción de crear la reserva
+    dispatch(createBooking(newBooking));
+
+    // Resetear el formulario
+    setFormData({
+      guest: '',
+      checkIn: '',
+      checkOut: '',
+      roomType: '',
+      specialRequest: '',
+      status: 'in'
+    });
   };
 
   return (
@@ -90,7 +91,7 @@ const EditBooking = () => {
               type="date" 
               id="checkIn"
               name="checkIn"
-              value={formatDate(formData.checkIn)}
+              value={formData.checkIn}
               onChange={handleChange}
               required
             />
@@ -100,7 +101,7 @@ const EditBooking = () => {
               type="date" 
               id="checkOut"
               name="checkOut"
-              value={formatDate(formData.checkOut)}
+              value={formData.checkOut}
               onChange={handleChange}
               required
             />
@@ -143,10 +144,10 @@ const EditBooking = () => {
             />
           </StyledDivRoomtypeRequest>
         </StyledDiv>
-        <StyledButton type="submit">Update Booking</StyledButton>
+        <StyledButton type="submit">Book</StyledButton>
       </form>
     </DivContainer>
   );
 };
 
-export default EditBooking;
+export default NewBooking;

@@ -10,20 +10,40 @@ import { StyledDiv, StyledTableCell, StyledTableCellHead } from './styled-compon
 import { FaPencil } from 'react-icons/fa6';
 import { GoTrash } from 'react-icons/go';
 import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../app/store'; // Adjust the path to your store file
 import { deleteBooking } from '../features/bookingsThunks';
 import { useNavigate } from 'react-router-dom';
 
-export default function BookingTable({ bookingsData }) {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+interface Booking {
+  id: number;
+  guest: string;
+  orderDate: string;
+  checkIn?: string;
+  check_in?: string;
+  checkOut?: string;
+  check_out?: string;
+  special?: string;
+  special_request?: string;
+  roomType: string;
+  roomNumber?: string;
+  bookStatus: string;
+}
 
-  const handleDelete = (id) => {
+interface BookingTableProps {
+  bookingsData: Booking[];
+}
+
+  const BookingTable: React.FC<BookingTableProps> = ({ bookingsData }) => {
+    const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
+
+  const handleDelete = (id: number) => {
     if (window.confirm('Are you sure you want to delete this booking?')) {
       dispatch(deleteBooking(id));
     }
   };
 
-  const handleEdit = (booking) => {
+  const handleEdit = (booking: Booking) => {
     navigate('/editbooking', { state: { booking } });
   };
 
@@ -54,21 +74,16 @@ export default function BookingTable({ bookingsData }) {
                 <StyledTableCell>{booking.checkIn || booking.check_in}</StyledTableCell>
                 <StyledTableCell>{booking.checkOut || booking.check_out}</StyledTableCell>
                 <StyledTableCell>{booking.special || booking.special_request || '-'}</StyledTableCell>
-                <StyledTableCell>{booking.roomType} {booking.roomNumber ? `- ${booking.roomNumber}` : ''}</StyledTableCell>
                 <StyledTableCell>
-                  <span>
-                    {booking.bookStatus}
-                  </span>
+                  {booking.roomType} {booking.roomNumber ? `- ${booking.roomNumber}` : ''}
+                </StyledTableCell>
+                <StyledTableCell>
+                  <span>{booking.bookStatus}</span>
                 </StyledTableCell>
                 <StyledTableCell>
                   <StyledDiv>
-                    <FaPencil className='pencil-icon' 
-                    onClick={() => handleEdit(booking)}
-                    />
-                    <GoTrash 
-                      className='trash-icon' 
-                      onClick={() => handleDelete(booking.id)}
-                    />
+                    <FaPencil className="pencil-icon" onClick={() => handleEdit(booking)} />
+                    <GoTrash className="trash-icon" onClick={() => handleDelete(booking.id)} />
                   </StyledDiv>
                 </StyledTableCell>
               </TableRow>
@@ -84,5 +99,6 @@ export default function BookingTable({ bookingsData }) {
       </Table>
     </TableContainer>
   );
-}
+};
 
+export default BookingTable;
