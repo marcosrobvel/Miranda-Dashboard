@@ -24,6 +24,38 @@ export interface FormattedBooking {
   bookStatus?: string;
 }
 
+export const fetchBookings = createAsyncThunk<
+  FormattedBooking[], 
+  void,             
+  { rejectValue: string }
+>(
+  'bookings/fetchBookings',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await new Promise<FormattedBooking[]>((resolve) =>
+        setTimeout(() => {
+          resolve([
+            {
+              id: 1,
+              guest: 'John Doe',
+              checkIn: '2025-05-01',
+              checkOut: '2025-05-05',
+              roomType: 'Deluxe',
+              specialRequest: 'Late check-in',
+              status: 'confirmed',
+              orderDate: '2025-04-20',
+            },
+          ]);
+        }, 500)
+      );
+
+      return response;
+    } catch (error) {
+      return rejectWithValue('Failed to fetch bookings');
+    }
+  }
+);
+
 export const createBooking = createAsyncThunk<
   FormattedBooking,
   BookingData,

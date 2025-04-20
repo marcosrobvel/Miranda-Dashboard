@@ -1,5 +1,5 @@
 import * as React from "react";
-import usersData from "../data/users";
+import users from "../data/users";
 import UsersTabs from "../components/UsersTabs";
 
 interface User {
@@ -15,7 +15,7 @@ interface UsersTabsProps {
 export default function UsersList() {
   return (
     <>
-      <UsersTabs usersData={usersData} />
+      <UsersTabs usersData={users} />
     </>
   );
 }

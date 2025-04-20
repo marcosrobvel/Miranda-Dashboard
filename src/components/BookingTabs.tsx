@@ -25,7 +25,7 @@ interface Booking {
 }
 
 interface BookingTabsProps {
-  bookingsData: Booking[];
+  bookings: Booking[];
 }
 
 interface CustomTabPanelProps {
@@ -55,7 +55,7 @@ function a11yProps(index: number) {
   };
 }
 
-const BookingTabs: React.FC<BookingTabsProps> = ({ bookingsData }) => {
+const BookingTabs: React.FC<BookingTabsProps> = ({ bookings }) => {
   const [value, setValue] = React.useState<number>(0);
   const { darkTheme } = useDarkTheme();
   const navigate = useNavigate();
@@ -114,16 +114,16 @@ const BookingTabs: React.FC<BookingTabsProps> = ({ bookingsData }) => {
       </div>
 
       <CustomTabPanel value={value} index={0}>
-        <BookingTable bookingsData={bookingsData} />
+        <BookingTable bookingsData={bookings} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <BookingTable bookingsData={bookingsData.filter((item) => item.bookStatus === 'in')} />
+        <BookingTable bookingsData={bookings.filter((item) => item.bookStatus === 'in')} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <BookingTable bookingsData={bookingsData.filter((item) => item.bookStatus === 'out')} />
+        <BookingTable bookingsData={bookings.filter((item) => item.bookStatus === 'out')} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
-        <BookingTable bookingsData={bookingsData.filter((item) => item.bookStatus === 'progress')} />
+        <BookingTable bookingsData={bookings.filter((item) => item.bookStatus === 'progress')} />
       </CustomTabPanel>
     </StyledContainer>
   );

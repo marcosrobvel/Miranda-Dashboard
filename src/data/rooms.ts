@@ -9,7 +9,7 @@ interface Room {
   status: "available" | "booked";
 }
 
-export const rooms: Room[] = [
+const rooms: Room[] = [
   {
     id: 1,
     photo: [
@@ -430,3 +430,5 @@ export const rooms: Room[] = [
     status: "available"
   }
 ]
+
+export default rooms;

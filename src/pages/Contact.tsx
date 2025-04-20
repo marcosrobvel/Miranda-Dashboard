@@ -1,6 +1,6 @@
 import * as React from "react";
 import ContactTabs from "../components/ContactTabs";
-import contactData from "../data/contact";
+import { contactData } from "../data/contact";
 
 interface Contact {
   id: string;

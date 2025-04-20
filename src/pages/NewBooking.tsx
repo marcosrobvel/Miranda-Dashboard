@@ -1,9 +1,9 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '../app/store'; 
 import { createBooking } from '../features/bookingsThunks';
 import { DivContainer, StyledButton, StyledDiv, StyledDivNameChecks, StyledDivRoomtypeRequest } from '../components/styled-components/NewBooking';
 
-// Definimos los tipos para el estado del formulario
 interface FormData {
   guest: string;
   checkIn: string;
@@ -13,41 +13,36 @@ interface FormData {
   status: string;
 }
 
-const NewBooking = () => {
-  const dispatch = useDispatch();
-  const [formData, setFormData] = useState<FormData>({
-    guest: '',
-    checkIn: '',
-    checkOut: '',
-    roomType: '',
-    specialRequest: '',
-    status: 'in'
-  });
+  const NewBooking: React.FC = () => {
+    const dispatch = useDispatch<AppDispatch>();
+    const [formData, setFormData] = useState<FormData>({
+      guest: '',
+      checkIn: '',
+      checkOut: '',
+      roomType: '',
+      specialRequest: '',
+      status: 'in'
+    });
 
-  // Manejar el cambio en los inputs del formulario
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Formatear la fecha en formato MM-DD-YYYY
   const formatDate = (dateString: string): string => {
     if (!dateString) return '';
     const [year, month, day] = dateString.split('-');
     return `${month}-${day}-${year}`;
   };
 
-  // Manejar el submit del formulario
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    // Validar que todos los campos obligatorios estén completos
     if (!formData.guest || !formData.checkIn || !formData.checkOut || !formData.roomType) {
       alert('Please complete all required fields');
       return;
     }
 
-    // Crear un objeto con los datos del nuevo booking
     const newBooking = {
       guest: formData.guest,
       check_in: formatDate(formData.checkIn),
@@ -57,10 +52,8 @@ const NewBooking = () => {
       status: formData.status.toLowerCase()
     };
 
-    // Despachar la acción de crear la reserva
     dispatch(createBooking(newBooking));
 
-    // Resetear el formulario
     setFormData({
       guest: '',
       checkIn: '',

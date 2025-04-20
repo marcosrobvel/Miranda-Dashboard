@@ -5,10 +5,10 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { StyledTableCell, StyledTableCellHead } from './styled-components/BookingTable';
+import { StyledTableCell, StyledTableCellHead } from './styled-components/BookingTable'; 
 import { Table } from '@mui/material';
 
-// Definimos el tipo para una habitación
+
 interface Room {
   id: string | number;
   photo: string;
@@ -20,7 +20,6 @@ interface Room {
   status: string;
 }
 
-// Tipamos las props del componente
 interface RoomsTableProps {
   roomsData: Room[];
 }
@@ -46,7 +45,9 @@ const RoomsTable: React.FC<RoomsTableProps> = ({ roomsData }) => {
             roomsData.map((room) => (
               <TableRow key={room.id}>
                 <StyledTableCell>{room.id}</StyledTableCell>
-                <StyledTableCell>{room.photo}</StyledTableCell>
+                <StyledTableCell>
+                  <img src={room.photo} alt={`Room ${room.roomNumber}`} style={{ width: 50, height: 50 }} />
+                </StyledTableCell>
                 <StyledTableCell>{room.roomNumber}</StyledTableCell>
                 <StyledTableCell>{room.roomType}</StyledTableCell>
                 <StyledTableCell>{room.amenities}</StyledTableCell>

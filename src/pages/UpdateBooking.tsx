@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../app/store'; // Adjust the path to your store file
 import { useNavigate, useLocation } from 'react-router-dom';
 import { updateBooking } from '../features/bookingsThunks';
 import { DivContainer, StyledButton, StyledDiv, StyledDivNameChecks, StyledDivRoomtypeRequest } from '../components/styled-components/NewBooking';
@@ -14,8 +15,7 @@ interface Booking {
   status: string;
 }
 
-const EditBooking = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -160,4 +160,4 @@ const EditBooking = () => {
   );
 };
 
-export default EditBooking;
+export default updateBooking;

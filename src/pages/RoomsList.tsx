@@ -1,11 +1,11 @@
 import * as React from "react";
-import roomsData from "../data/rooms";
+import rooms from "../data/rooms";
 import RoomsTable from "../components/RoomsTable";
 
 interface Room {
-  id: number;
+  id: string | number;
   photo: string;
-  roomNumber: string;
+  roomNumber: string | number;
   roomType: string;
   amenities: string;
   price: string;
@@ -13,14 +13,21 @@ interface Room {
   status: string;
 }
 
-interface RoomsListProps {
-  roomsData: Room[];
-}
-
 export default function RoomsList() {
-  return (
-    <>
-      <RoomsTable roomsData={roomsData} />
-    </>
-  );
+  const processedRooms = React.useMemo(() => {
+    if (!Array.isArray(rooms)) return [];
+    
+    return rooms.map(room => ({
+      id: room.id !== undefined ? room.id : '',
+      photo: room.photo || '',
+      roomNumber: room.roomNumber !== undefined ? room.roomNumber : '',
+      roomType: room.roomType || '',
+      amenities: room.amenities || '',
+      price: room.price || '',
+      offer_price: room.offer_price || '',
+      status: room.status || ''
+    }));
+  }, []);
+
+  return <RoomsTable roomsData={processedRooms} />;
 }
