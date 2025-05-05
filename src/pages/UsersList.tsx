@@ -1,5 +1,5 @@
 import * as React from "react";
-import users from "../data/users";
+import { users } from "../data/users";
 import UsersTabs from "../components/UsersTabs";
 
 interface User {

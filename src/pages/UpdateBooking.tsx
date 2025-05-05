@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../app/store'; // Adjust the path to your store file
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';  
 import { useNavigate, useLocation } from 'react-router-dom';
 import { updateBooking } from '../features/bookingsThunks';
-import { DivContainer, StyledButton, StyledDiv, StyledDivNameChecks, StyledDivRoomtypeRequest } from '../components/styled-components/NewBooking';
+import { AppDispatch } from '../app/store';
+import { DivContainer, StyledDiv } from '../components/styled-components/NewBooking';
+import { StyledDivNameChecks, StyledDivRoomtypeRequest } from '../components/styled-components/NewBooking';
+import { StyledButton } from '../components/styled-components/NewBooking';
 
 interface Booking {
   id: string;
@@ -11,16 +13,17 @@ interface Booking {
   checkIn: string;
   checkOut: string;
   roomType: string;
-  specialRequest: string;
+  specialRequest?: string;
   status: string;
 }
 
-  const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
-  const location = useLocation();
+const UpdateBooking: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();  // Mover dentro del componente
+  const navigate = useNavigate();  // Mover dentro del componente
+  const location = useLocation();  // Mover dentro del componente
   
   const { booking } = location.state as { booking: Booking } || {};
-  
+
   const [formData, setFormData] = useState<Booking>({
     id: '',
     guest: '',
@@ -73,12 +76,19 @@ interface Booking {
       check_in: formatDate(formData.checkIn),
       check_out: formatDate(formData.checkOut),
       room_type: formData.roomType,
-      special_request: formData.specialRequest,
+      special_request: formData.specialRequest || '',
       status: formData.status.toLowerCase()
     };
   
-    dispatch(updateBooking(updatedBooking));
-    navigate('/bookings');
+    dispatch(updateBooking(updatedBooking))
+    .unwrap()
+    .then(() => {
+      navigate('/bookings');
+    })
+    .catch((error) => {
+      console.error('Update failed:', error);
+      alert('Failed to update booking: ' + error);
+    });
   };
 
   return (
@@ -160,4 +170,4 @@ interface Booking {
   );
 };
 
-export default updateBooking;
+export default UpdateBooking;

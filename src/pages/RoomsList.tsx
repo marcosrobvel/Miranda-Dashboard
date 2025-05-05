@@ -19,12 +19,12 @@ export default function RoomsList() {
     
     return rooms.map(room => ({
       id: room.id !== undefined ? room.id : '',
-      photo: room.photo || '',
+      photo: Array.isArray(room.photo) ? room.photo[0] : room.photo || '',
       roomNumber: room.roomNumber !== undefined ? room.roomNumber : '',
       roomType: room.roomType || '',
       amenities: room.amenities || '',
-      price: room.price || '',
-      offer_price: room.offer_price || '',
+      price: String(room.price || ''),
+      offer_price: String(room.offer_price || ''),
       status: room.status || ''
     }));
   }, []);

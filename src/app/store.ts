@@ -5,9 +5,8 @@ export const store = configureStore({
   reducer: {
     booking: bookingReducer,
   },
-  devTools: true,
+  devTools: true as boolean,
 });
 
-// Inferencia automática de tipos del estado y dispatch
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

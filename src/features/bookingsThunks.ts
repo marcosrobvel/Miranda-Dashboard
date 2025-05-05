@@ -65,7 +65,7 @@ export const createBooking = createAsyncThunk<
   async (bookingsData, { rejectWithValue }) => {
     try {
       const formattedBooking: FormattedBooking = {
-        id: Date.now(), // Generamos un ID temporal
+        id: Date.now(), 
         guest: bookingsData.guest,
         checkIn: bookingsData.check_in,
         checkOut: bookingsData.check_out,
