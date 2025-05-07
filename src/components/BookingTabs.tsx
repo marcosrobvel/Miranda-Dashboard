@@ -14,14 +14,11 @@ interface Booking {
   guest: string;
   orderDate: string;
   checkIn?: string;
-  check_in?: string;
   checkOut?: string;
-  check_out?: string;
-  special?: string;
-  special_request?: string;
+  specialRequest?: string;
   roomType: string;
-  roomNumber?: string;
-  bookStatus: string;
+  roomNumber?: string | number;
+  bookStatus: string; 
 }
 
 interface BookingTabsProps {

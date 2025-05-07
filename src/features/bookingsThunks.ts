@@ -1,12 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { bookings } from '../data/booking';
 
 interface BookingData {
   id?: string | number;
   guest: string;
-  check_in: string;
-  check_out: string;
-  room_type: string;
-  special_request: string;
+  checkIn: string;
+  checkOut: string;
+  roomType: string;
+  specialRequest: string;
   status?: string;
   orderDate?: string;
 }
@@ -24,72 +25,71 @@ export interface FormattedBooking {
   bookStatus?: string;
 }
 
-export const fetchBookings = createAsyncThunk<
-  FormattedBooking[], 
-  void,             
-  { rejectValue: string }
->(
+const API_URL = import.meta.env.VITE_API_URL;
+
+export const fetchBookings = createAsyncThunk<FormattedBooking[], void, { rejectValue: string }>(
   'bookings/fetchBookings',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await new Promise<FormattedBooking[]>((resolve) =>
-        setTimeout(() => {
-          resolve([
-            {
-              id: 1,
-              guest: 'John Doe',
-              checkIn: '2025-05-01',
-              checkOut: '2025-05-05',
-              roomType: 'Deluxe',
-              specialRequest: 'Late check-in',
-              status: 'confirmed',
-              orderDate: '2025-04-20',
-            },
-          ]);
-        }, 500)
-      );
+      const response = await fetch(`${API_URL}/bookings`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        },
+      });
 
-      return response;
+      if (!response.ok) {
+        throw new Error('Failed to fetch bookings');
+      }
+
+      const data: FormattedBooking[] = await response.json();
+      return data;
     } catch (error) {
       return rejectWithValue('Failed to fetch bookings');
     }
   }
 );
 
-export const createBooking = createAsyncThunk<
-  FormattedBooking,
-  BookingData,
-  { rejectValue: string }
->(
+export const createBooking = createAsyncThunk<FormattedBooking, FormattedBooking, { rejectValue: string }>(
   'bookings/createBooking',
-  async (bookingsData, { rejectWithValue }) => {
+  async (newBooking, { rejectWithValue }) => {
     try {
-      const formattedBooking: FormattedBooking = {
-        id: Date.now(), 
-        guest: bookingsData.guest,
-        checkIn: bookingsData.check_in,
-        checkOut: bookingsData.check_out,
-        roomType: bookingsData.room_type,
-        specialRequest: bookingsData.special_request,
-        status: bookingsData.status || 'in',
-        orderDate: bookingsData.orderDate || new Date().toISOString()
-      };
+      const response = await fetch(`${API_URL}/bookings`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        },
+        body: JSON.stringify(newBooking),
+      });
 
-      return formattedBooking;
+      if (!response.ok) {
+        throw new Error('Failed to create booking');
+      }
+
+      const data: FormattedBooking = await response.json();
+      return data;
     } catch (error) {
       return rejectWithValue('Failed to create booking');
     }
   }
 );
 
-export const deleteBooking = createAsyncThunk<
-  string | number,
-  string | number,
-  { rejectValue: string }
->(
+export const deleteBooking = createAsyncThunk<string, string, { rejectValue: string }>(
   'bookings/deleteBooking',
   async (bookingId, { rejectWithValue }) => {
     try {
+      const response = await fetch(`${API_URL}/bookings/${bookingId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete booking');
+      }
+
       return bookingId;
     } catch (error) {
       return rejectWithValue('Failed to delete booking');
@@ -97,26 +97,25 @@ export const deleteBooking = createAsyncThunk<
   }
 );
 
-export const updateBooking = createAsyncThunk<
-  FormattedBooking,
-  BookingData & { id: string | number },
-  { rejectValue: string }
->(
+export const updateBooking = createAsyncThunk<FormattedBooking, FormattedBooking, { rejectValue: string }>(
   'bookings/updateBooking',
-  async (bookingData, { rejectWithValue }) => {
+  async (updatedBooking, { rejectWithValue }) => {
     try {
-      const formattedBooking: FormattedBooking = {
-        id: bookingData.id,
-        guest: bookingData.guest,
-        checkIn: bookingData.check_in,
-        checkOut: bookingData.check_out,
-        roomType: bookingData.room_type,
-        specialRequest: bookingData.special_request,
-        status: bookingData.status || 'in',
-        orderDate: bookingData.orderDate || new Date().toISOString()
-      };
+      const response = await fetch(`${API_URL}/bookings/${updatedBooking.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        },
+        body: JSON.stringify(updatedBooking),
+      });
 
-      return formattedBooking;
+      if (!response.ok) {
+        throw new Error('Failed to update booking');
+      }
+
+      const data: FormattedBooking = await response.json();
+      return data;
     } catch (error) {
       return rejectWithValue('Failed to update booking');
     }

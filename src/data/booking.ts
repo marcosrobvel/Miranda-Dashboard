@@ -2,15 +2,15 @@ type RoomType = "Single Bed" | "Double Bed" | "Suite" | "Deluxe Suite";
 type BookingStatus = "in" | "out" | "progress";
 
 interface Booking {
-  id: number; 
+  id: number;
   guest: string;
-  orderDate: string; 
+  orderDate: string;
   checkIn: string;
   checkOut: string;
-  special: string | null; 
-  roomType: RoomType;
-  roomNumber: number;
-  bookStatus: BookingStatus;
+  special: string | null;
+  roomType: string;
+  roomNumber: number | string;
+  bookStatus: string; 
   photo: string[]; 
 }
 
