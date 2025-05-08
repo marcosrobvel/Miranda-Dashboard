@@ -31,8 +31,11 @@ const Login: React.FC = () => {
 
       const data = await response.json();
       localStorage.setItem("authToken", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
 
+      login(data.user, data.token);
       navigate("/");
+
     } catch (err) {
       setError("Incorrect credentials, try again:");
     }

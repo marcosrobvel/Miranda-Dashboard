@@ -40,7 +40,7 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
 
 interface AuthContextProps {
   state: AuthState;
-  login: (username: string, password: string) => boolean;
+  login: (user: User, token: string) => void;
   logout: () => void;
   updateUser: (userData: Partial<User>) => void;
 }
@@ -58,14 +58,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  const login = (username: string, password: string) => {
-    if (username === 'admin' && password === 'admin') {
-      const user = { username };
-      dispatch({ type: actionTypes.LOGIN, payload: user });
-      localStorage.setItem('logged', 'true');
-      return true;
-    }
-    return false;
+  const login = (user: User, token: string) => {
+    dispatch({ type: actionTypes.LOGIN, payload: user });
+    localStorage.setItem("authToken", token);
+    localStorage.setItem("logged", "true");
   };
 
   const logout = () => {
