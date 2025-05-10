@@ -14,6 +14,11 @@ const Login: React.FC = () => {
     e.preventDefault();
     setError("");
 
+/**
+ * probar en local, si funciona, hacer build de front, vovler a cargar los archivos en aws y probar
+ * 
+ */
+
     try {
       const API_URL = import.meta.env.VITE_API_URL;
 
