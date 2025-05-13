@@ -1,17 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { bookings } from '../data/booking';
 
-interface BookingData {
-  id?: string | number;
-  guest: string;
-  checkIn: string;
-  checkOut: string;
-  roomType: string;
-  specialRequest: string;
-  status?: string;
-  orderDate?: string;
-}
-
+// Estructura esperada para una reserva formateada
 export interface FormattedBooking {
   id: string | number;
   guest: string;
@@ -25,21 +14,37 @@ export interface FormattedBooking {
   bookStatus?: string;
 }
 
+// Datos mínimos requeridos al crear o actualizar
+export interface BookingData {
+  id?: string | number;
+  guest: string;
+  checkIn: string;
+  checkOut: string;
+  roomType: string;
+  specialRequest: string;
+  status?: string;
+  orderDate?: string;
+}
+
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const fetchBookings = createAsyncThunk<FormattedBooking[], void, { rejectValue: string }>(
+export const fetchBookings = createAsyncThunk<
+  FormattedBooking[],
+  void,
+  { rejectValue: string }
+>(
   'bookings/fetchBookings',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${API_URL}api/bookings`, {
+      const response = await fetch(`${API_URL}/api/bookings`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch bookings');
+        throw new Error('Error al obtener reservas');
       }
 
       const data: FormattedBooking[] = await response.json();
@@ -50,7 +55,11 @@ export const fetchBookings = createAsyncThunk<FormattedBooking[], void, { reject
   }
 );
 
-export const createBooking = createAsyncThunk<FormattedBooking, FormattedBooking, { rejectValue: string }>(
+export const createBooking = createAsyncThunk<
+  FormattedBooking,
+  FormattedBooking,
+  { rejectValue: string }
+>(
   'bookings/createBooking',
   async (newBooking, { rejectWithValue }) => {
     try {
@@ -58,13 +67,13 @@ export const createBooking = createAsyncThunk<FormattedBooking, FormattedBooking
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
         body: JSON.stringify(newBooking),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to create booking');
+        throw new Error('Error al crear reserva');
       }
 
       const data: FormattedBooking = await response.json();
@@ -75,19 +84,23 @@ export const createBooking = createAsyncThunk<FormattedBooking, FormattedBooking
   }
 );
 
-export const deleteBooking = createAsyncThunk<string, string, { rejectValue: string }>(
+export const deleteBooking = createAsyncThunk<
+  string,
+  string,
+  { rejectValue: string }
+>(
   'bookings/deleteBooking',
   async (bookingId, { rejectWithValue }) => {
     try {
       const response = await fetch(`${API_URL}/api/bookings/${bookingId}`, {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       });
 
       if (!response.ok) {
-        throw new Error('Failed to delete booking');
+        throw new Error('Error al eliminar reserva');
       }
 
       return bookingId;
@@ -97,7 +110,11 @@ export const deleteBooking = createAsyncThunk<string, string, { rejectValue: str
   }
 );
 
-export const updateBooking = createAsyncThunk<FormattedBooking, FormattedBooking, { rejectValue: string }>(
+export const updateBooking = createAsyncThunk<
+  FormattedBooking,
+  FormattedBooking,
+  { rejectValue: string }
+>(
   'bookings/updateBooking',
   async (updatedBooking, { rejectWithValue }) => {
     try {
@@ -105,13 +122,13 @@ export const updateBooking = createAsyncThunk<FormattedBooking, FormattedBooking
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
         body: JSON.stringify(updatedBooking),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to update booking');
+        throw new Error('Error al actualizar reserva');
       }
 
       const data: FormattedBooking = await response.json();

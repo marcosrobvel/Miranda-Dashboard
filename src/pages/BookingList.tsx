@@ -40,8 +40,8 @@ export default function BookingList() {
 
   return (
     <div className="booking-list-container">
-      {status === 'loading' && <div className="loading-message">Loading bookings...</div>}
-      {status === 'failed' && <div className="error-message">Error: {error?.toString() || 'Unknown error'}</div>}
+      {status === 'pending' && <div className="loading-message">Loading bookings...</div>}
+      {status === 'rejected' && <div className="error-message">Error: {error?.toString() || 'Unknown error'}</div>}
       
       <BookingTabs bookings={formattedBookings} />
     </div>
