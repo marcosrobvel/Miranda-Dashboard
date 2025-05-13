@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-// Estructura esperada para una reserva formateada
 export interface FormattedBooking {
   id: string | number;
   guest: string;
@@ -14,7 +13,6 @@ export interface FormattedBooking {
   bookStatus?: string;
 }
 
-// Datos mínimos requeridos al crear o actualizar
 export interface BookingData {
   id?: string | number;
   guest: string;
@@ -36,10 +34,12 @@ export const fetchBookings = createAsyncThunk<
   'bookings/fetchBookings',
   async (_, { rejectWithValue }) => {
     try {
+      const token = localStorage.getItem('authToken');
+
       const response = await fetch(`${API_URL}/api/bookings`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 

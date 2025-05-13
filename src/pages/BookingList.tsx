@@ -20,11 +20,9 @@ export default function BookingList() {
   const dispatch = useDispatch<AppDispatch>();
   const { bookings, status, error } = useSelector((state: RootState) => state.booking);
 
-  useEffect(() => {
-    if (bookings.length === 0) {
-      dispatch(fetchBookings());
-    }
-  }, [dispatch, bookings.length]);
+useEffect(() => {
+  dispatch(fetchBookings());
+}, [dispatch]);
 
   // Transformar los datos para que coincidan con el tipo Booking
   const formattedBookings: Booking[] = bookings.map((booking: any) => ({
