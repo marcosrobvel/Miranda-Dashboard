@@ -40,19 +40,31 @@ export const fetchBookings = createAsyncThunk<
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
-        mode: 'cors'
+        mode: 'cors',
+        credentials: 'include'
       });
 
       if (!response.ok) {
-        throw new Error('Error al obtener reservas');
+        if (response.status === 404) {
+          return rejectWithValue('Endpoint not found (404)');
+        }
+        if (response.status === 502) {
+          return rejectWithValue('Bad gateway (502) - Server error');
+        }
+        const errorData = await response.json().catch(() => ({}));
+        return rejectWithValue(errorData.message || `HTTP error! status: ${response.status}`);
       }
 
       const data: FormattedBooking[] = await response.json();
       return data;
     } catch (error) {
-      return rejectWithValue('Failed to fetch bookings');
+      if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+        return rejectWithValue('Network error/CORS issue - Failed to connect to server');
+      }
+      return rejectWithValue(error instanceof Error ? error.message : 'Unknown error occurred');
     }
   }
 );
