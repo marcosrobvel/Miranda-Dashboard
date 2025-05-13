@@ -4,7 +4,6 @@ import BookingTabs from '../components/BookingTabs';
 import { fetchBookings } from '../features/bookingsThunks'; 
 import { RootState, AppDispatch } from '../app/store';
 
-// Interface que coincide con lo que espera BookingTabs
 interface Booking {
   id: number;
   guest: string;
@@ -24,7 +23,6 @@ useEffect(() => {
   dispatch(fetchBookings());
 }, [dispatch]);
 
-  // Transformar los datos para que coincidan con el tipo Booking
   const formattedBookings: Booking[] = bookings.map((booking: any) => ({
     id: Number(booking.id),
     guest: booking.guest || 'Unknown Guest',
