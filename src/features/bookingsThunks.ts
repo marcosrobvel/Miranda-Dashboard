@@ -39,8 +39,10 @@ export const fetchBookings = createAsyncThunk<
       const response = await fetch(`${API_URL}/api/bookings`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         },
+        mode: 'cors'
       });
 
       if (!response.ok) {
