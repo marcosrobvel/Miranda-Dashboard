@@ -26,25 +26,20 @@ export interface BookingData {
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const fetchBookings = createAsyncThunk<
-  FormattedBooking[],
-  void,
-  { rejectValue: string }
->(
+export const fetchBookings = createAsyncThunk<FormattedBooking[], void, { rejectValue: string }>(
   'bookings/fetchBookings',
   async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem('authToken');
-
       const response = await fetch(`${API_URL}api/bookings`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Accept': 'application/json',
         },
         mode: 'cors',
-        credentials: 'include'
+        credentials: 'include',
       });
 
       if (!response.ok) {
