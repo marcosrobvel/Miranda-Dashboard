@@ -30,7 +30,6 @@ interface BookingTableProps {
 }
 
 const BookingTable: React.FC<BookingTableProps> = ({ bookingsData }) => {
-  console.log('Bookings Data:', bookingsData); 
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
@@ -43,8 +42,6 @@ const BookingTable: React.FC<BookingTableProps> = ({ bookingsData }) => {
   const handleEdit = (booking: Booking) => {
     navigate('/editbooking', { state: { booking } });
   };
-
-  console.log('Bookings Data:', bookingsData); // Log the bookings data to check its structure
 
   return (
     <TableContainer component={Paper} sx={{ maxWidth: '100%', margin: 'auto', boxShadow: 3 }}>
