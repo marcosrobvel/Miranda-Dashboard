@@ -19,6 +19,7 @@ export interface BookingData {
   checkIn: string;
   checkOut: string;
   roomType: string;
+  roomNumber?: number;
   specialRequest: string;
   status?: string;
   orderDate?: string;

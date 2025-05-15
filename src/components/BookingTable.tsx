@@ -21,7 +21,7 @@ interface Booking {
   checkOut?: string;
   special?: string;
   roomType: string;
-  roomNumber?: string | number;
+  roomNumber?: number;
   bookStatus: string;
 }
 
@@ -43,6 +43,8 @@ const BookingTable: React.FC<BookingTableProps> = ({ bookingsData }) => {
   const handleEdit = (booking: Booking) => {
     navigate('/editbooking', { state: { booking } });
   };
+
+  console.log('Bookings Data:', bookingsData); // Log the bookings data to check its structure
 
   return (
     <TableContainer component={Paper} sx={{ maxWidth: '100%', margin: 'auto', boxShadow: 3 }}>
