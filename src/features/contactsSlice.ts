@@ -36,20 +36,49 @@ const contactsSlice = createSlice({
       })
       .addCase(fetchContacts.rejected, (state, action) => {
         state.status = 'rejected';
-        state.error = action.payload || 'Error loading contacts';
+        state.error = action.payload || 'Failed to fetch contacts';
       })
 
+      .addCase(createContact.pending, (state) => {
+        state.status = 'pending';
+        state.error = null;
+      })
       .addCase(createContact.fulfilled, (state, action) => {
+        state.status = 'fulfilled';
         state.contacts.push(action.payload);
       })
+      .addCase(createContact.rejected, (state, action) => {
+        state.status = 'rejected';
+        state.error = action.payload || 'Failed to create contact';
+      })
+
+      .addCase(deleteContact.pending, (state) => {
+        state.status = 'pending';
+        state.error = null;
+      })
       .addCase(deleteContact.fulfilled, (state, action) => {
-        state.contacts = state.contacts.filter(c => c.id !== action.payload);
+        state.status = 'fulfilled';
+        state.contacts = state.contacts.filter((c) => c.id !== action.payload);
+      })
+      .addCase(deleteContact.rejected, (state, action) => {
+        state.status = 'rejected';
+        state.error = action.payload || 'Failed to delete contact';
+      })
+
+      .addCase(updateContact.pending, (state) => {
+        state.status = 'pending';
+        state.error = null;
       })
       .addCase(updateContact.fulfilled, (state, action) => {
-        const index = state.contacts.findIndex(c => c.id === action.payload.id);
+        state.status = 'fulfilled';
+        const index = state.contacts.findIndex((c) => c.id === action.payload.id);
         if (index !== -1) {
           state.contacts[index] = action.payload;
         }
+      })
+      .addCase(updateContact.rejected, (state, action) => {
+        state.status = 'rejected';
+        state.error = action.payload || 'Failed to update contact';
       });
   },
 });

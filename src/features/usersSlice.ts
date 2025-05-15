@@ -36,20 +36,49 @@ const usersSlice = createSlice({
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.status = 'rejected';
-        state.error = action.payload || 'Error loading users';
+        state.error = action.payload || 'Failed to fetch users';
       })
 
+      .addCase(createUser.pending, (state) => {
+        state.status = 'pending';
+        state.error = null;
+      })
       .addCase(createUser.fulfilled, (state, action) => {
+        state.status = 'fulfilled';
         state.users.push(action.payload);
       })
+      .addCase(createUser.rejected, (state, action) => {
+        state.status = 'rejected';
+        state.error = action.payload || 'Failed to create user';
+      })
+
+      .addCase(deleteUser.pending, (state) => {
+        state.status = 'pending';
+        state.error = null;
+      })
       .addCase(deleteUser.fulfilled, (state, action) => {
-        state.users = state.users.filter(u => u.id !== action.payload);
+        state.status = 'fulfilled';
+        state.users = state.users.filter((u) => u.id !== action.payload);
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
+        state.status = 'rejected';
+        state.error = action.payload || 'Failed to delete user';
+      })
+
+      .addCase(updateUser.pending, (state) => {
+        state.status = 'pending';
+        state.error = null;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
-        const index = state.users.findIndex(u => u.id === action.payload.id);
+        state.status = 'fulfilled';
+        const index = state.users.findIndex((u) => u.id === action.payload.id);
         if (index !== -1) {
           state.users[index] = action.payload;
         }
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.status = 'rejected';
+        state.error = action.payload || 'Failed to update user';
       });
   },
 });
