@@ -39,7 +39,7 @@ export const fetchBookings = createAsyncThunk<FormattedBooking[], void, { reject
           Authorization: `Bearer ${token}`,
           'Accept': 'application/json',
         },
-        mode: 'no-cors',
+       // mode: 'no-cors',
         credentials: 'include',
       });
 
