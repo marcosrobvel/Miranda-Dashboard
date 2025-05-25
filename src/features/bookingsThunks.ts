@@ -32,11 +32,11 @@ export const fetchBookings = createAsyncThunk<FormattedBooking[], void, { reject
   async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${API_URL}api/auth/bookings`, {
+      const response = await fetch(`${API_URL}api/bookings`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer: ` + `${token}`,
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ` + `${token}`,
           'Accept': 'application/json',
         },
         mode: 'no-cors',
@@ -77,7 +77,7 @@ export const createBooking = createAsyncThunk<
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
         },
         body: JSON.stringify(newBooking),
       });
@@ -105,7 +105,7 @@ export const deleteBooking = createAsyncThunk<
       const response = await fetch(`${API_URL}api/bookings/${bookingId}`, {
         method: 'DELETE',
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
         },
       });
 
