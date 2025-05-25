@@ -44,12 +44,14 @@ interface FormData {
     }
 
     const newBooking = {
+      id: Date.now().toString(),
       guest: formData.guest,
-      check_in: formatDate(formData.checkIn),
-      check_out: formatDate(formData.checkOut),
-      room_type: formData.roomType,
-      special_request: formData.specialRequest,
-      status: formData.status.toLowerCase()
+      checkIn: formatDate(formData.checkIn),
+      checkOut: formatDate(formData.checkOut),
+      roomType: formData.roomType,
+      specialRequest: formData.specialRequest,
+      status: formData.status.toLowerCase(),
+      orderDate: new Date().toISOString()
     };
 
     dispatch(createBooking(newBooking));
