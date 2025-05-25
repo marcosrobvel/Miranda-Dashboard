@@ -4,7 +4,6 @@ import roomsReducer from '../features/roomsSlice';
 import contactsReducer from '../features/contactsSlice';
 import usersReducer from '../features/usersSlice';
 import rooms from '../data/rooms';
-import { users } from '../data/users';
 
 export const store = configureStore({
   reducer: {
