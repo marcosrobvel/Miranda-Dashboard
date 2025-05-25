@@ -32,10 +32,10 @@ export const fetchBookings = createAsyncThunk<FormattedBooking[], void, { reject
   async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`${API_URL}api/bookings`, {
+      const response = await fetch(`${API_URL}api/auth/bookings`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer: ` + `${token}`,
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
